@@ -1,0 +1,10 @@
+---
+
+ansible_pkg_mgr: macports
+
+mas_installed_apps:
+  - { id: 497799835, name: "Xcode (8.1)" }
+  - { id: 803453959, name: "Slack" }
+
+mas_email: ""
+mas_password: ""

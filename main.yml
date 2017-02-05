@@ -7,6 +7,12 @@
 
   pre_tasks:
     - include_vars: "{{ item }}"
+      with_first_found:
+        - files:
+          - "vars/{{ ansible_os_family }}.yml"
+          skip: true
+
+    - include_vars: "{{ item }}"
       with_fileglob:
         - ../config.yml
 

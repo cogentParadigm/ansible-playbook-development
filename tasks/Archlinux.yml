@@ -1,0 +1,4 @@
+---
+
+- name: install packages
+  include_role: name=git
