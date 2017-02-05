@@ -1,0 +1,10 @@
+---
+
+- name: Install App Store applications
+  include_role:
+    name: mas
+    when: mas_installed_apps
+
+- name: OSX specific tasks (install wget, tree, bash-completion)
+  include_role:
+    name: osx

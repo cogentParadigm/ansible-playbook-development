@@ -10,6 +10,5 @@
       with_fileglob:
         - ../config.yml
 
-  roles:
-    - name: mas
-      when: mas_installed_apps
+  tasks:
+    - include: tasks/{{ ansible_os_family }}.yml
