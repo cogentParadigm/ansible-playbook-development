@@ -1,11 +1,10 @@
 ---
 
-- macports: name={{ item }} state=present
-  sudo: yes
-  with_items:
-    - tree
-    - wget
-    - bash-completion
+- package: name=wget state=installed
+  become: true
+
+- package: name=bash-completion state=installed
+  become: true
 
 - lineinfile: dest=/etc/hosts line="127.0.0.1 localhost"
-  sudo: yes
+  become: true

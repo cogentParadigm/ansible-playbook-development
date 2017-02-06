@@ -2,9 +2,7 @@
 
 ansible_pkg_mgr: macports
 
+# specify mas_email and mas_password in local config.yml
 mas_installed_apps:
-  - { id: 497799835, name: "Xcode (8.1)" }
-  - { id: 803453959, name: "Slack" }
-
-mas_email: ""
-mas_password: ""
+  - { id: 497799835, name: "Xcode (8.2.1)" }
+  - { id: 803453959, name: "Slack (2.0.3)" }

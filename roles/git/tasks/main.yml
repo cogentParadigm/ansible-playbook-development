@@ -1,3 +1,4 @@
 ---
 
-- package: name=git state=present
+- package: name=git state=installed
+  become: true

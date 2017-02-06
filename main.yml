@@ -6,18 +6,24 @@
     - default.config.yml
 
   pre_tasks:
-    - include_vars: "{{ item }}"
+    - include_vars: "{{ os_family_vars }}"
       with_first_found:
         - files:
           - "vars/{{ ansible_os_family }}.yml"
           skip: true
+      loop_control:
+        loop_var: os_family_vars
 
-    - include_vars: "{{ item }}"
+    - include_vars: "{{ local_vars }}"
       with_fileglob:
         - ../config.yml
+      loop_control:
+        loop_var: local_vars
 
   tasks:
-    - include: "{{ item }}"
+    - include: "{{ task_include }}"
       with_first_found:
         - "tasks/{{ ansible_os_family }}.yml"
         - "tasks/Unsupported.yml"
+      loop_control:
+        loop_var: task_include
