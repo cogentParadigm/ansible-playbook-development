@@ -1,13 +1,13 @@
 ---
 
+- lineinfile: dest=/etc/hosts line="127.0.0.1 localhost"
+  become: true
+
+- name: install packages
+  macports: name={{ item }} state=present
+  with_items: "{{ packages }}"
+
 - name: Install App Store applications
   include_role:
     name: mas
     when: mas_installed_apps
-
-- name: OSX specific tasks (install wget, bash-completion)
-  include_role:
-    name: osx
-
-- name: Install Git
-  include_role: name=git

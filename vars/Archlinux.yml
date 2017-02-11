@@ -1,3 +1,41 @@
 ---
 
 ansible_pkg_mgr: yaourt
+
+packages:
+  - apache
+  - bash-completion
+  - chromium
+  - composer
+  - curl
+  - dolphin
+  - filelight
+  - firefox
+  - gd
+  - git
+  - imagemagick
+  - mariadb
+  - mongodb
+  - nodejs
+  - npm
+  - php
+  - php-apcu
+  - php-fpm
+  - php-gd
+  - php-mcrypt
+  - php-memcached
+  - php-mongodb
+  - php-imagick
+  - php-intl
+  - php-solr
+  - php56
+  - php56-apcu
+  - php56-fpm
+  - php56-gd
+  - php56-imagick
+  - php56-intl
+  - php56-mcrypt
+  - php56-memcached
+  - php56-xdebug
+  - solr
+  - xdebug

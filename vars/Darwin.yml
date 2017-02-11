@@ -2,6 +2,53 @@
 
 ansible_pkg_mgr: macports
 
+packages:
+  - apache2
+  - bash-completion
+  - git
+  - ImageMagick
+  - jslint
+  - mariadb-server
+  - mongodb
+  - mongo-tools
+  - php56
+  - php56-apache2handler
+  - php56-curl
+  - php56-exif
+  - php56-gd
+  - php56-iconv
+  - php56-imagick
+  - php56-intl
+  - php56-mbstring
+  - php56-mcrypt
+  - php56-memcached
+  - php56-mongo
+  - php56-mysql
+  - php56-openssl
+  - php56-pcntl
+  - php56-pdflib
+  - php56-xdebug
+  - php56-xhprof
+  - php56-zip
+  - php70  
+  - php70-curl
+  - php70-exif
+  - php70-fpm
+  - php70-gd
+  - php70-iconv
+  - php70-imagick
+  - php70-intl
+  - php70-mbstring
+  - php70-mcrypt
+  - php70-mongodb
+  - php70-mysql
+  - php70-openssl
+  - php70-xdebug
+  - php70-zip
+  - unrar
+  - watch
+  - wget
+
 # specify mas_email and mas_password in local config.yml
 mas_installed_apps:
   - { id: 497799835, name: "Xcode (8.2.1)" }

@@ -1,4 +1,0 @@
----
-
-- package: name=git state=installed
-  become: true

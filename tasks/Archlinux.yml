@@ -1,4 +1,8 @@
 ---
 
+- name: import GPG keys for PHP56 packages
+  shell: gpg --keyserver hkp://hkps.pool.sks-keyservers.net --recv-keys C2BF0BC433CFC8B3 FE857D9A90D90EC1
+
 - name: install packages
-  include_role: name=git
+  yaourt: name={{ item }} state=present
+  with_items: "{{ packages }}"
