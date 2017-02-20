@@ -6,6 +6,7 @@
 - name: install packages
   macports: name={{ item }} state=present
   with_items: "{{ packages }}"
+  become: true
 
 - name: Install App Store applications
   include_role:
