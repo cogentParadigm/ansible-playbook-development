@@ -4,6 +4,10 @@ exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+version() {
+  echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }';
+}
+
 usecases() {
   if [ -v "USE_CASES[$1]" ]; then
     echo "Use cases:"
@@ -11,21 +15,20 @@ usecases() {
   fi
 }
 
-if [ "$(which bash)" != "/opt/local/bin/bash" ]; then
+if [ "$SHELL" != "/opt/local/bin/bash" ]; then
   echo ""
   echo -e "\033[91mWarning:\033[0m"
-  echo "Your bash installation is not in the expected location."
+  echo "MacPorts bash is not set as your default shell."
   echo "Expected: /opt/local/bin/bash"
-  echo "Actual:   $(which bash)"
+  echo "Actual:   $SHELL"
   echo "This script may not work as expected."
 fi
 
-if ! exists port; then
-  echo ""
-  echo -e "Macports (port): \033[91mnot found\033[0m"
-  echo ""
-  exit 1
-fi
+OS_VERSION=$(defaults read loginwindow SystemVersionStampAsString)
+TARGET_OS_VERSION="10.14.4"
+
+XCODE_VERSION=$(xcodebuild -version | awk 'NR==1{print $2}')
+TARGET_XCODE_VERSION="10.2"
 
 PORTS+=( ansible )
 PORTS+=( apache2 )
@@ -110,6 +113,7 @@ PATHS[bash]=/opt/local/bin/bash
 PATHS[chromedriver]=/opt/local/bin/chromedriver
 PATHS[composer]=/opt/local/bin/composer
 PATHS[mailcatcher]=~/.rbenv/shims/mailcatcher
+PATHS[mysql]=/opt/local/lib/mariadb-10.2/bin/mysql
 PATHS[node]=~/.nvm/versions/node/v11.10.1/bin/node
 PATHS[npm]=~/.nvm/versions/node/v11.10.1/bin/npm
 
@@ -126,17 +130,48 @@ USE_CASES[jslint]="Javascript linter."
 USE_CASES[mailcatcher]="Local SMTP server for email testing."
 USE_CASES[npm]="Node.js package/dependency manager."
 USE_CASES[rbenv]="Ruby environment dependency.\nmailcatcher and fastlane are ruby applications."
-USE_CASES[ruby-build]=USE_CASES[rbenv]
+USE_CASES[ruby-build]=${USE_CASES[rbenv]}
 USE_CASES[smysqldump]="Download SQL dumps from remote databases over SSH."
 USE_CASES[unixODBC]="MongooseIM dependency.\nMS SQL Server / ODBC dependency."
 USE_CASES[/opt/MongooseIM]="XMPP applications such as chat."
 
-source ~/.bash_profile
-source ~/.bashrc
+# source ~/.bash_profile
+# source ~/.bashrc
+
+echo -e "\nChecking Mac OS version...\n"
+echo "Installed version: $OS_VERSION"
+echo "Target version:    $TARGET_OS_VERSION"
+
+if [ "$(version $TARGET_OS_VERSION)" -gt "$(version $OS_VERSION)" ]; then
+  echo -e "\n\033[91mYour OS version is not up to date.\033[0m"
+  echo -e "\nIf you have outdated applications, do not attempt to update major OS versions and applications at the same time."
+  echo -e "Under most circumstances, the best course of actions is to update your OS version first."
+  echo -e "Follow the MacPorts migration guide to reinstall your ports:"
+  echo "https://trac.macports.org/wiki/Migration"
+  echo "This does not apply to minor version upgrades."
+else
+  echo -e "\n\033[92mYour OS version is up to date.\033[0m"
+fi
+
+echo -e "\nChecking Xcode version...\n"
+echo "Installed version: $XCODE_VERSION"
+echo "Target version:    $TARGET_XCODE_VERSION"
+
+if [ "$(version $TARGET_XCODE_VERSION)" -gt "$(version $XCODE_VERSION)" ]; then
+  echo -e "\n\033[91mYour Xcode version is not up to date.\033[0m"
+else
+  echo -e "\n\033[92mYour Xcode version is up to date.\033[0m"
+fi
 
 echo -e "\nChecking installed ports...\n"
 
-INSTALLED_PORTS=$(port installed)
+if ! exists port; then
+  echo -e "port: \033[91mnot found\033[0m"
+  echo -e "\nUnable to determine installed ports because MacPorts is not installed.\n"
+  INSTALLED_PORTS=""
+else
+  INSTALLED_PORTS=$(port installed)
+fi
 
 for PORT in "${PORTS[@]}"; do
   if echo "$INSTALLED_PORTS" | grep -q $PORT; then
