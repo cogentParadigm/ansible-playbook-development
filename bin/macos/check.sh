@@ -7,7 +7,7 @@ exists() {
 usecases() {
   if [ -v "USE_CASES[$1]" ]; then
     echo "Use cases:"
-    echo "${USE_CASES[$1]}"
+    echo -e "${USE_CASES[$1]}"
   fi
 }
 
@@ -81,21 +81,28 @@ PORTS+=( php71-yaml )
 PORTS+=( php71-zip )
 PORTS+=( rbenv )
 PORTS+=( ruby-build )
+PORTS+=( texlive )
+PORTS+=( texlive-latex-extra )
 PORTS+=( unixODBC )
 PORTS+=( unrar )
 PORTS+=( watch )
 PORTS+=( wget )
+PORTS+=( wkhtmltopdf )
 
 COMMANDS+=( apachectl )
 COMMANDS+=( chromedriver )
+COMMANDS+=( code )
 COMMANDS+=( composer )
+COMMANDS+=( fastlane )
 COMMANDS+=( mailcatcher )
 COMMANDS+=( mongo )
 COMMANDS+=( mysql )
 COMMANDS+=( node )
+COMMANDS+=( react-native )
 COMMANDS+=( npm )
 COMMANDS+=( nvm )
 COMMANDS+=( smysqldump )
+COMMANDS+=( xcodebuild )
 
 declare -A PATHS
 PATHS[apachectl]=/opt/local/sbin/apachectl
@@ -123,9 +130,6 @@ USE_CASES[ruby-build]=USE_CASES[rbenv]
 USE_CASES[smysqldump]="Download SQL dumps from remote databases over SSH."
 USE_CASES[unixODBC]="MongooseIM dependency.\nMS SQL Server / ODBC dependency."
 USE_CASES[/opt/MongooseIM]="XMPP applications such as chat."
-
-# TODO:
-# xcode, latex, fastlane, react-native
 
 source ~/.bash_profile
 source ~/.bashrc
@@ -160,7 +164,11 @@ for K in "${!PATHS[@]}"; do
   if [ "$(which $K)" == "${PATHS[$K]}" ]; then
     echo -e "$K: \033[92m$(which $K)\033[0m"
   else
-    echo -e "$K: \033[91m$(which $K)\033[0m"
+    if [ "$(which $K)" == "" ]; then
+      echo -e "$K: \033[91mnot installed\033[0m"
+    else
+      echo -e "$K: \033[91m$(which $K)\033[0m"
+    fi
     usecases $K
   fi
 done
