@@ -21,6 +21,10 @@
   shell: chsh -s /opt/local/bin/bash
   when: lookup("env", "SHELL") != "/opt/local/bin/bash"
 
+- name: Setup MongoDB
+  include_role:
+    name: mongodb
+
 - name: Install App Store applications
   include_role:
     name: mas

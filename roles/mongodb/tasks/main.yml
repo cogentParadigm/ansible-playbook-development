@@ -1,0 +1,28 @@
+---
+- name: Create /opt/local/etc/mongodb
+  file:
+    path: /opt/local/etc/mongodb
+    recurse: yes
+    state: directory
+  become: true
+
+- name: Create /opt/local/etc/mongodb/mongod.conf
+  template:
+    src: templates/mongod.conf.j2
+    dest: /opt/local/etc/mongodb/mongod.conf
+    force: no
+  become: true
+
+- name: Add start/stop routines to ~/.bash_profile
+  blockinfile:
+    marker: "# MONGODB - {mark} ANSIBLE MANAGED BLOCK"
+    block: "{{ lookup('file', 'templates/.bash_profile.j2') }}"
+    dest: ~/.bash_profile
+    backup: yes
+
+- name: Start MongoDB
+  shell: mongod -f /opt/local/etc/mongodb/mongod.conf
+  become: true
+  args:
+    creates: /opt/local/var/db/mongodb/mongod.lock
+
