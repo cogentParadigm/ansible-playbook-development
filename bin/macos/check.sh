@@ -30,7 +30,7 @@ TARGET_OS_VERSION="10.14.4"
 XCODE_VERSION=$(xcodebuild -version | awk 'NR==1{print $2}')
 TARGET_XCODE_VERSION="10.2"
 
-PORTS+=( ansible )
+PORTS+=( py-ansible )
 PORTS+=( apache2 )
 PORTS+=( bash )
 PORTS+=( bash-completion )
@@ -121,7 +121,7 @@ FILES+=( /opt/MongooseIM )
 FILES+=( /Library/Developer/CommandLineTools/usr/bin/clang )
 
 declare -A USE_CASES
-USE_CASES[ansible]="Running this ansible playbook."
+USE_CASES[py-ansible]="Running this ansible playbook."
 USE_CASES[chromedriver]="Automated browser testing.\nUsed by Behat, Intern, and Selenium."
 USE_CASES[composer]="PHP package/dependency manager."
 USE_CASES[erlang]="MongooseIM dependency."
