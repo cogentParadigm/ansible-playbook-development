@@ -9,7 +9,6 @@ packages:
   - erlang
   - git
   - ImageMagick
-  - jslint
   - mariadb-10.2-server
   - mongodb
   - mongo-tools
