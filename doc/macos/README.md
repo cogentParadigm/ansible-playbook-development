@@ -10,7 +10,7 @@ To setup Mac OS, you'll need to do the following manually before you can run thi
 
 ### Update Mac OS
 
-You should be running Mac OS 10.14 or later. If you are updating major versions, 10.13 to 10.14 for example, then you'll need to re-install MacPorts and your installed ports using the [Migration Guide(https://trac.macports.org/wiki/Migration).
+You should be running Mac OS 10.14 or later. If you are updating major versions, 10.13 to 10.14 for example, then you'll need to re-install MacPorts and your installed ports using the [Migration Guide](https://trac.macports.org/wiki/Migration).
 
 ### Installing Xcode
 

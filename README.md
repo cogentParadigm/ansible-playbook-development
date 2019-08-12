@@ -4,7 +4,7 @@ This playbook is for setting up a local development environment primarily for th
 
 The variables and tasks run by this playbook will be determined by your OS family. On Mac OS, the OS family name is `Darwin` so the default variables loaded are in `vars/Darwin.yml`.
 
-You can create a config.yml at the project root to override the default variables.
+You can create a `config.yml` at the project root to override the default variables.
 
 ### Running this playbook
 

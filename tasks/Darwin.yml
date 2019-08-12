@@ -3,10 +3,17 @@
 - lineinfile: dest=/etc/hosts line="127.0.0.1 localhost"
   become: true
 
-- name: install packages
+- lineinfile: dest=/etc/shells line="/opt/local/bin/bash"
+  become: true
+
+- name: Install packages
   macports: name={{ item }} state=present
   with_items: "{{ packages }}"
   become: true
+
+- name: Set login shell
+  shell: chsh -s /opt/local/bin/bash
+  when: lookup("env", "SHELL") != "/opt/local/bin/bash"
 
 - name: Install App Store applications
   include_role:
