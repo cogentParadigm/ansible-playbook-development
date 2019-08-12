@@ -10,7 +10,7 @@
       with_first_found:
         - files:
           - "vars/{{ ansible_os_family }}.yml"
-          skip: true
+          errors: ignore
       loop_control:
         loop_var: os_family_vars
 

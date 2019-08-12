@@ -61,6 +61,7 @@ packages:
   - wget
 
 # specify mas_email and mas_password in local config.yml
+install_mas_apps: false
 mas_installed_apps:
   - { id: 497799835, name: "Xcode (10.2)" }
   - { id: 803453959, name: "Slack (4.0.1)" }

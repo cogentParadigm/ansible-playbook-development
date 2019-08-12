@@ -1,12 +1,15 @@
 ---
 
-- lineinfile: dest=/etc/hosts line="127.0.0.1 localhost"
+- name: Add localhost entry to /etc/hosts
+  lineinfile: dest=/etc/hosts line="127.0.0.1 localhost"
   become: true
 
-- lineinfile: dest=/etc/shells line="/opt/local/bin/bash"
+- name: Add /opt/local/bin/bash to /etc/shells
+  lineinfile: dest=/etc/shells line="/opt/local/bin/bash"
   become: true
 
-- lineinfile: dest=/etc/paths.d/00-macports line="/opt/local/bin" state=present create=yes
+- name: Create /etc/paths.d/00-macports
+  lineinfile: dest=/etc/paths.d/00-macports line="/opt/local/bin" state=present create=yes
   become: true
 
 - name: Install packages
@@ -21,4 +24,4 @@
 - name: Install App Store applications
   include_role:
     name: mas
-  when: mas_installed_apps
+  when: install_mas_apps and mas_installed_apps
