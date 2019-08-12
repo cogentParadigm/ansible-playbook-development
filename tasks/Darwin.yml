@@ -6,6 +6,9 @@
 - lineinfile: dest=/etc/shells line="/opt/local/bin/bash"
   become: true
 
+- lineinfile: dest=/etc/paths.d/00-macports line="/opt/local/bin" state=present create=yes
+  become: true
+
 - name: Install packages
   macports: name={{ item }} state=present
   with_items: "{{ packages }}"
