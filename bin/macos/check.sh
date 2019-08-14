@@ -4,8 +4,8 @@ exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
-version() {
-  echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }';
+version_gt() {
+  test "$(printf '%s\n' "$@" | sort --version-sort | head -n 1)" != "$1";
 }
 
 usecases() {
@@ -140,7 +140,7 @@ echo -e "\nChecking Mac OS version...\n"
 echo "Installed version: $OS_VERSION"
 echo "Target version:    $TARGET_OS_VERSION"
 
-if [ "$(version $TARGET_OS_VERSION)" -gt "$(version $OS_VERSION)" ]; then
+if version_gt $TARGET_OS_VERSION $OS_VERSION; then
   echo -e "\n\033[91mYour OS version is not up to date.\033[0m"
   echo -e "\nIf you have outdated applications, do not attempt to update major OS versions and applications at the same time."
   echo -e "Under most circumstances, the best course of actions is to update your OS version first."
@@ -155,7 +155,7 @@ echo -e "\nChecking Xcode version...\n"
 echo "Installed version: $XCODE_VERSION"
 echo "Target version:    $TARGET_XCODE_VERSION"
 
-if [ "$(version $TARGET_XCODE_VERSION)" -gt "$(version $XCODE_VERSION)" ]; then
+if version_gt $TARGET_XCODE_VERSION $XCODE_VERSION; then
   echo -e "\n\033[91mYour Xcode version is not up to date.\033[0m"
 else
   echo -e "\n\033[92mYour Xcode version is up to date.\033[0m"

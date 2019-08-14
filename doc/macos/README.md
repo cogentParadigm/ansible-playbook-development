@@ -36,3 +36,19 @@ To install ansible run:
 ```
 sudo port install py-ansible
 ```
+
+## Run a system check
+
+There is an included script which will do a rough analysis of your machine to see how the current state compares to the expected state when all desired dependencies are installed. It's not comprehensive, so passing the check doesn't guarantee you don't have any problems or unconfigured applications.
+
+The check script is at `bin/macos/check.sh` so if you have cloned the project, you can run this from the project root:
+
+```
+./bin/macos/check.sh
+```
+
+You can also download `check.sh` idependently and run this from wherever you have downloaded it:
+
+```
+./check.sh
+```

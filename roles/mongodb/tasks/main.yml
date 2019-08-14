@@ -1,4 +1,8 @@
 ---
+- name: Fail without password
+  fail: msg="You must specify a root password for MongoDB. Found {{ mongodb_root_password }}."
+  when: mongodb_root_password == ''
+
 - name: Create /opt/local/etc/mongodb
   file:
     path: /opt/local/etc/mongodb
@@ -25,4 +29,25 @@
   become: true
   args:
     creates: /opt/local/var/db/mongodb/mongod.lock
+
+- name: Check auth setting
+  shell: mongo --eval "db.getUsers()" | grep "requires authentication" | cat
+  register: isAuth
+
+- name: Check if root exists
+  shell: mongo admin --eval "db.getUsers()" | grep "admin.root" | cat
+  register: hasRoot
+
+- name: Create root user
+  shell: mongo admin --eval "db.createUser({user:'root',pwd:'{{ mongodb_root_password }}',roles:[{role:'root',db:'admin'}]});"
+  when: isAuth.stdout == '' and hasRoot.stdout == ''
+
+- name: Check if root exists
+  shell: mongo admin --eval "db.getUsers()" | grep "admin.root" | cat
+  register: hasRoot
+
+- name: Secure installation
+  lineinfile: dest=/opt/local/etc/mongodb/mongod.conf line="auth = true"
+  become: true
+  when: isAuth.stdout == '' and hasRoot != ''
 

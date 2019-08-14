@@ -16,7 +16,7 @@
 
     - include_vars: "{{ local_vars }}"
       with_fileglob:
-        - ../config.yml
+        - config.yml
       loop_control:
         loop_var: local_vars
 
