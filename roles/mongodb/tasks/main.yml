@@ -51,3 +51,10 @@
   become: true
   when: isAuth.stdout == '' and hasRoot != ''
 
+- name: Create mongorc file
+  lineinfile:
+    dest: ~/.mongorc.js
+    line: db.getSiblingDB("admin").auth("root", "{{ mongodb_root_password }}");
+    state: present
+    create: yes
+

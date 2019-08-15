@@ -1,2 +1,4 @@
 ---
 # global default configurations
+mongodb_root_password: ""
+install_mas_apps: true
