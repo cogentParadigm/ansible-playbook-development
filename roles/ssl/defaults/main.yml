@@ -1,0 +1,7 @@
+---
+ssl_certificate_dn_country: ""
+ssl_certificate_dn_state: ""
+ssl_certificate_dn_city: ""
+ssl_certificate_dn_organization: ""
+ssl_certificate_dn_organization_unit: ""
+ssl_certificate_dn_email: ""

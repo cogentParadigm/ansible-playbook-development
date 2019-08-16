@@ -1,0 +1,14 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+distinguished_name = dn
+
+[dn]
+C={{ ssl_certificate_dn_country }}
+ST={{ ssl_certificate_dn_state }}
+L={{ ssl_certificate_dn_city }}
+O={{ ssl_certificate_dn_organization }}
+OU={{ ssl_certificate_dn_organization_unit }}
+emailAddress={{ ssl_certificate_dn_email }}
+CN = localhost
