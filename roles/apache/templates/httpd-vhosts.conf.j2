@@ -1,0 +1,50 @@
+NameVirtualHost {{ apache_listen_ip }}:{{ apache_listen_port }}
+NameVirtualHost {{ apache_listen_ip }}:{{ apache_listen_port_ssl }}
+
+{% for vhost in apache_vhosts %}
+
+{# Set up VirtualHosts #}
+<VirtualHost {{ apache_listen_ip }}:{{ apache_listen_port }}>
+{% if vhost.documentroot is defined %}
+  DocumentRoot "{{ vhost.documentroot }}"
+{% endif %}
+  ServerName {{ vhost.servername }}
+{% if vhost.serveralias is defined %}
+  ServerAlias {{ vhost.serveralias }}
+{% endif %}
+  ErrorLog "var/log/apache2/{{ vhost.servername }}-error_log"
+  CustomLog "var/log/apache2/{{ vhost.servername }}-access_log" common
+{% if vhost.extra_parameters is defined %}
+  {{ vhost.extra_parameters }}
+{% endif %}
+</VirtualHost>
+
+{# Set up SSL VirtualHosts #}
+{% if vhost.ssl %}
+<VirtualHost {{ apache_listen_ip }}:{{ apache_listen_port_ssl }}>
+{% if vhost.documentroot is defined %}
+  DocumentRoot "{{ vhost.documentroot }}"
+{% endif %}
+  ServerName {{ vhost.servername }}
+{% if vhost.serveralias is defined %}
+  ServerAlias {{ vhost.serveralias }}
+{% endif %}
+
+  ErrorLog "var/log/apache2/{{ vhost.servername }}-ssl-error_log"
+  CustomLog "var/log/apache2/{{ vhost.servername }}-ssl-access_log" common
+
+  SSLEngine on
+  SSLCipherSuite {{ apache_ssl_cipher_suite }}
+  SSLProtocol {{ apache_ssl_protocol }}
+  SSLHonorCipherOrder On
+  SSLCompression off
+  SSLCertificateFile "/etc/ssl/certs/server.crt"
+  SSLCertificateKeyFile "/etc/ssl/certs/server.key"
+{% if vhost.extra_parameters is defined %}
+
+  {{ vhost.extra_parameters }}
+{% endif %}
+</VirtualHost>
+{% endif %}
+
+{% endfor %}

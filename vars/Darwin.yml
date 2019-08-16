@@ -60,6 +60,9 @@ packages:
   - watch
   - wget
 
+apache_conf_path: "/opt/local/etc/apache2"
+apache_modules_path: "/opt/local/lib/apache2/modules"
+
 # specify mas_email and mas_password in local config.yml
 install_mas_apps: false
 mas_installed_apps:

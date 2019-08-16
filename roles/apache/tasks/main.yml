@@ -1,0 +1,35 @@
+---
+- name: Configure Apache
+  lineinfile:
+    dest: "{{ apache_conf_path }}/httpd.conf"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items: "{{ apache_conf_items }}"
+
+- name: Check if PHP module is enabled
+  shell: grep "mod_php71.so" {{ apache_conf_path }}/httpd.conf | cat
+  register: hasPHP
+
+- name: Enable PHP module
+  shell: apxs -a -e -n php7 mod_php71.so
+  args:
+    chdir: {{ apache_modules_path }}
+  when: hasPHP.stdout == ''
+  become: true
+
+- name: Enable additional modules
+  shell: apxs -a -e mod_{{ item }}.so
+  args:
+    chdir: {{ apache_modules_path }}
+  with_items: "{{ apache_modules }}"
+  become: true
+
+- name: Add apache vhosts configuration
+  template:
+    src: "{{ apache_vhosts_template }}"
+    dest: "{{ apache_conf_path }}/extra/{{ apache_vhosts_filename }}"
+  when: apache_create_vhosts | bool
+  become: true
+
+
