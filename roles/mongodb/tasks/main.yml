@@ -33,10 +33,12 @@
 - name: Check auth setting
   shell: mongo --eval "db.getUsers()" | grep "requires authentication" | cat
   register: isAuth
+  changed_when: false
 
 - name: Check if root exists
   shell: mongo admin --eval "db.getUsers()" | grep "admin.root" | cat
   register: hasRoot
+  changed_when: false
 
 - name: Create root user
   shell: mongo admin --eval "db.createUser({user:'root',pwd:'{{ mongodb_root_password }}',roles:[{role:'root',db:'admin'}]});"
@@ -45,11 +47,12 @@
 - name: Check if root exists
   shell: mongo admin --eval "db.getUsers()" | grep "admin.root" | cat
   register: hasRoot
+  changed_when: false
 
 - name: Secure installation
   lineinfile: dest=/opt/local/etc/mongodb/mongod.conf line="auth = true"
   become: true
-  when: isAuth.stdout == '' and hasRoot != ''
+  when: isAuth.stdout != '' or hasRoot != ''
 
 - name: Create mongorc file
   lineinfile:

@@ -10,7 +10,7 @@ apache_documentroot: "{{ lookup('env', 'HOME') }}/public_html"
 
 apache_conf_items:
   - regexp: "^#?ServerName "
-    line: "ServerName localhost:{{ apache_listen_ip }}"
+    line: "ServerName localhost:{{ apache_listen_port }}"
   - regexp: "^DocumentRoot "
     line: 'DocumentRoot "{{ apache_documentroot }}"'
   - regexp: '^<Directory "((?!cgi).)*">'

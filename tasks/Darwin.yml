@@ -1,7 +1,10 @@
 ---
 
-- name: Add localhost entry to /etc/hosts
-  lineinfile: dest=/etc/hosts line="127.0.0.1 localhost"
+- name: Add entries to /etc/hosts
+  lineinfile: dest=/etc/hosts line="127.0.0.1 {{ item }}"
+  with_items:
+    - localhost
+    - local.com
   become: true
 
 - name: Add /opt/local/bin/bash to /etc/shells
@@ -12,6 +15,11 @@
   lineinfile: dest=/etc/paths.d/00-macports line="/opt/local/bin" state=present create=yes
   become: true
 
+- name: Install App Store applications
+  include_role:
+    name: mas
+  when: install_mas_apps and mas_installed_apps
+
 - name: Install packages
   macports: name={{ item }} state=present
   with_items: "{{ packages }}"
@@ -21,6 +29,10 @@
   shell: chsh -s /opt/local/bin/bash
   when: lookup("env", "SHELL") != "/opt/local/bin/bash"
 
+- name: Setup SSL
+  include_role:
+    name: ssl
+
 - name: Setup Apache
   include_role:
     name: apache
@@ -28,8 +40,3 @@
 - name: Setup MongoDB
   include_role:
     name: mongodb
-
-- name: Install App Store applications
-  include_role:
-    name: mas
-  when: install_mas_apps and mas_installed_apps
