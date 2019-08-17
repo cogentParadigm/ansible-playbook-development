@@ -31,14 +31,18 @@
   changed_when: "'Changing shell' in result.stderr and 'no changes' not in result.stderr"
   become: true
 
-- name: Setup SSL
+- name: Configure SSL
   include_role:
     name: ssl
 
-- name: Setup Apache
+- name: Configure PHP
+  include_role:
+    name: php
+
+- name: Configure Apache
   include_role:
     name: apache
 
-- name: Setup MongoDB
+- name: Configure MongoDB
   include_role:
     name: mongodb

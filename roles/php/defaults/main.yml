@@ -1,0 +1,40 @@
+---
+php_ini_path: /etc/php/php.ini
+php_max_execution_time: 120
+php_max_input_time: 1000
+php_max_input_vars: 5000
+php_memory_limit: 512M
+php_post_max_size: 20M
+php_upload_max_filesize: 20M
+php_mysql_default_socket: /var/run/mysqld/mysqld.sock
+php_ini_settings:
+  - section: PHP
+    option: max_execution_time
+    value: "{{ php_max_execution_time }}"
+  - section: PHP
+    option: max_input_time
+    value: "{{ php_max_input_time }}"
+  - section: PHP
+    option: max_input_vars
+    value: "{{ php_max_input_vars }}"
+  - section: PHP
+    option: memory_limit
+    value: "{{ php_memory_limit }}"
+  - section: PHP
+    option: post_max_size
+    value: "{{ php_post_max_size }}"
+  - section: PHP
+    option: upload_max_filesize
+    value: "{{ php_upload_max_filesize }}"
+  - section: Pdo_mysql
+    option: pdo_mysql.default_socket
+    value: "{{ php_mysql_default_socket }}"
+  - section: MySQLi
+    option: mysqli.default_socket
+    value: "{{ php_mysql_default_socket }}"
+  - section: xdebug
+    option: xdebug.remote_enable
+    value: 1
+  - section: xdebug
+    option: xdebug.remote_autostart
+    value: 1

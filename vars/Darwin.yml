@@ -63,6 +63,9 @@ packages:
 apache_conf_path: "/opt/local/etc/apache2"
 apache_modules_path: "/opt/local/lib/apache2/modules"
 
+php_ini_path: /opt/local/etc/php71/php.ini
+php_mysql_default_socket: /opt/local/var/run/mariadb-10.2/mysqld.sock
+
 # specify mas_email and mas_password in local config.yml
 install_mas_apps: false
 mas_installed_apps:
