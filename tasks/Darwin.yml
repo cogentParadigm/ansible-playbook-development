@@ -26,8 +26,10 @@
   become: true
 
 - name: Set login shell
-  shell: chsh -s /opt/local/bin/bash
-  when: lookup("env", "SHELL") != "/opt/local/bin/bash"
+  shell: 'chsh -s /opt/local/bin/bash {{ ansible_user_id }}'
+  register: result
+  changed_when: "'Changing shell' in result.stderr and 'no changes' not in result.stderr"
+  become: true
 
 - name: Setup SSL
   include_role:

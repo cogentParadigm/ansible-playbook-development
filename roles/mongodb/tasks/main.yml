@@ -1,7 +1,9 @@
 ---
-- name: Fail without password
-  fail: msg="You must specify a root password for MongoDB. Found {{ mongodb_root_password }}."
-  when: mongodb_root_password == ''
+- name: Check root password
+  assert:
+    that: mongodb_root_password != ''
+    fail_msg: "You must specify a root password for MongoDB."
+    quiet: yes
 
 - name: Create /opt/local/etc/mongodb
   file:
@@ -30,29 +32,16 @@
   args:
     creates: /opt/local/var/db/mongodb/mongod.lock
 
-- name: Check auth setting
-  shell: mongo --eval "db.getUsers()" | grep "requires authentication" | cat
-  register: isAuth
-  changed_when: false
-
-- name: Check if root exists
-  shell: mongo admin --eval "db.getUsers()" | grep "admin.root" | cat
-  register: hasRoot
-  changed_when: false
-
 - name: Create root user
-  shell: mongo admin --eval "db.createUser({user:'root',pwd:'{{ mongodb_root_password }}',roles:[{role:'root',db:'admin'}]});"
-  when: isAuth.stdout == '' and hasRoot.stdout == ''
-
-- name: Check if root exists
-  shell: mongo admin --eval "db.getUsers()" | grep "admin.root" | cat
+  shell: mongo admin -u root -p "{{ mongodb_root_password }}" --authenticationDatabase admin --eval "db.getUsers()" | grep "admin.root" || mongo admin --eval "db.createUser({user:'root',pwd:'{{ mongodb_root_password }}',roles:[{role:'root',db:'admin'}]});"
   register: hasRoot
-  changed_when: false
+  changed_when: "'Successfully added user' in hasRoot.stdout"
+  failed_when: "'admin.root' not in hasRoot.stdout"
 
 - name: Secure installation
   lineinfile: dest=/opt/local/etc/mongodb/mongod.conf line="auth = true"
   become: true
-  when: isAuth.stdout != '' or hasRoot != ''
+  when: "'admin.root' in hasRoot.stdout"
 
 - name: Create mongorc file
   lineinfile:
@@ -60,4 +49,5 @@
     line: db.getSiblingDB("admin").auth("root", "{{ mongodb_root_password }}");
     state: present
     create: yes
+  when: "'admin.root' in hasRoot.stdout"
 
