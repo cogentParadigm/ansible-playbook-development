@@ -30,6 +30,11 @@ packages:
   - php-imagick
   - php-intl
   - php-solr
+  - solr
+  - sudo
+  - xdebug
+
+aur_packages:
   - php56
   - php56-apcu
   - php56-fpm
@@ -39,6 +44,3 @@ packages:
   - php56-mcrypt
   - php56-memcached
   - php56-xdebug
-  - solr
-  - sudo
-  - xdebug

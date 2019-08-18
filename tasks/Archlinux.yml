@@ -4,6 +4,5 @@
   shell: gpg --keyserver hkp://hkps.pool.sks-keyservers.net --recv-keys C2BF0BC433CFC8B3 FE857D9A90D90EC1
 
 - name: install packages
-  pacman: name={{ item }} state=present
-  with_items: "{{ packages }}"
+  pacman: name={{ packages }} state=present
   become: true
