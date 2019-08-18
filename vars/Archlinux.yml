@@ -21,21 +21,23 @@ packages:
   - nodejs
   - npm
   - php
+  - php-apache
   - php-apcu
   - php-fpm
   - php-gd
-  - php-mcrypt
-  - php-memcached
-  - php-mongodb
   - php-imagick
   - php-intl
-  - php-solr
-  - solr
+  - php-memcached
+  - php-mongodb
   - sudo
   - xdebug
 
-aur_packages:
+  aur_packages:
+  - mongodb
+  - php-pear
+  - php-yaml
   - php56
+  - php56-apache
   - php56-apcu
   - php56-fpm
   - php56-gd
@@ -43,4 +45,6 @@ aur_packages:
   - php56-intl
   - php56-mcrypt
   - php56-memcached
+  - php56-pear
   - php56-xdebug
+  - solr
