@@ -10,7 +10,7 @@
 - name: Install yay
   shell: command -v yay || git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
   register: result
-  changed: "'installing yay' in result.stdout"
+  changed_when: "'installing yay' in result.stdout"
 
 - name: Install AUR packages
   yay: name={{ item }} state=present
