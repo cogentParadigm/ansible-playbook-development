@@ -1,6 +1,6 @@
 ---
 
-ansible_pkg_mgr: pacman
+ansible_pkg_mgr: yay
 
 packages:
   - apache
