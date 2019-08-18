@@ -1,5 +1,6 @@
 ---
 
+ansible_python_interpreter: /opt/local/bin/python
 ansible_pkg_mgr: macports
 
 packages:
@@ -9,6 +10,7 @@ packages:
   - erlang
   - git
   - ImageMagick
+  - lynx
   - mariadb-10.2-server
   - mongodb
   - mongo-tools
@@ -53,6 +55,10 @@ packages:
   - php71-xdebug
   - php71-yaml
   - php71-zip
+  - python27
+  - python37
+  - py27-pip
+  - py37-pip
   - rbenv
   - ruby-build
   - unixODBC
@@ -62,6 +68,11 @@ packages:
 
 apache_conf_path: "/opt/local/etc/apache2"
 apache_modules_path: "/opt/local/lib/apache2/modules"
+
+mariadb_conf_path: /opt/local/etc/mariadb-10.2/my.cnf
+mariadb_data_dir: /opt/local/var/db/mariadb-10.2
+mariadb_socket_path: /opt/local/var/run/mariadb-10.2/mysqld.sock
+mariadb_slow_query_log_file: /opt/local/var/log/mariadb/slow-query.log
 
 php_ini_path: /opt/local/etc/php71/php.ini
 php_mysql_default_socket: /opt/local/var/run/mariadb-10.2/mysqld.sock

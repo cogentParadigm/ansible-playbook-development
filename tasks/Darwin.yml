@@ -35,6 +35,10 @@
   include_role:
     name: ssl
 
+- name: Configure MariaDB
+  include_role:
+    name: mariadb
+
 - name: Configure PHP
   include_role:
     name: php

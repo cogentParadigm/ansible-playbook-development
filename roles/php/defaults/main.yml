@@ -6,7 +6,7 @@ php_max_input_vars: 5000
 php_memory_limit: 512M
 php_post_max_size: 20M
 php_upload_max_filesize: 20M
-php_mysql_default_socket: /var/run/mysqld/mysqld.sock
+php_mysql_default_socket: /run/mysqld/mysqld.sock
 php_ini_settings:
   - section: PHP
     option: max_execution_time

@@ -1,0 +1,25 @@
+---
+mariadb_root_password: ""
+mariadb_conf_path: /etc/mysql/my.cnf
+mariadb_data_dir: /var/lib/mysql
+mariadb_socket_path: /run/mysqld/mysqld.sock
+mariadb_max_allowed_packet: 16M
+mariadb_long_query_time: 1
+mariadb_slow_query_log: 1
+mariadb_slow_query_log_file: slow-query.log
+mariadb_conf_items:
+  - section: mysqld
+    option: sql_mode
+    value: '""'
+  - section: mysqld
+    option: max_allowed_packet
+    value: "{{ mariadb_max_allowed_packet }}"
+  - section: mysqld
+    option: long_query_time
+    value: "{{ mariadb_long_query_time }}"
+  - section: mysqld
+    option: slow_query_log
+    value: "{{ mariadb_slow_query_log }}"
+  - section: mysqld
+    option: slow_query_log_file
+    value: "{{ mariadb_slow_query_log_file }}"

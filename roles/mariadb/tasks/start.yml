@@ -1,0 +1,5 @@
+---
+- service:
+    name: mariadb
+    state: started
+  become: true

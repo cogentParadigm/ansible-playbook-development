@@ -40,4 +40,10 @@
   when: apache_create_vhosts | bool
   become: true
 
+- name: Start Apache
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "start-{{ ansible_os_family }}.yml"
+    - "start.yml"
+
 

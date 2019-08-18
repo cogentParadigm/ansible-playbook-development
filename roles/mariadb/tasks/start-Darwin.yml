@@ -1,0 +1,5 @@
+---
+- shell: port load mariadb-10.2-server
+  args:
+    creates: "{{ mariadb_socket_path }}"
+  become: true

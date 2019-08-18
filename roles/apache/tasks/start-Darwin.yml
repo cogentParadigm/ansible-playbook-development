@@ -1,0 +1,5 @@
+---
+- shell: apachectl status 2>&1 | grep "Unable to connect" && port load apache2 || echo "OK"
+  register: result
+  changed_when: "'Loading startupitem' in result.stdout"
+  become: true

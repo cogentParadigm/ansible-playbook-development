@@ -19,6 +19,8 @@ apache_conf_items:
 apache_modules:
   - deflate
   - expires
+  - proxy
+  - proxy_fcgi
   - rewrite
   - ssl
 
