@@ -1,9 +1,10 @@
 ---
 
-ansible_pkg_mgr: yaourt
+ansible_pkg_mgr: pacman
 
 packages:
   - apache
+  - base-devel
   - bash-completion
   - chromium
   - composer
@@ -13,6 +14,7 @@ packages:
   - firefox
   - gd
   - git
+  - go
   - imagemagick
   - mariadb
   - mongodb
@@ -38,4 +40,5 @@ packages:
   - php56-memcached
   - php56-xdebug
   - solr
+  - sudo
   - xdebug
