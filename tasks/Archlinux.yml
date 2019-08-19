@@ -15,4 +15,3 @@
 - name: Install AUR packages
   yay: name={{ item }} state=present
   with_items: "{{ aur_packages }}"
-  become: true
