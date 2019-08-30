@@ -1,0 +1,4 @@
+[mysqld]
+{% for item in mariadb_conf_items %}
+{{ item.option }} = {{ item.value }}
+{% endfor %}
