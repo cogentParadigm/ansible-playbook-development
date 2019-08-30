@@ -27,10 +27,10 @@
     backup: yes
 
 - name: Start MongoDB
-  shell: mongod -f /opt/local/etc/mongodb/mongod.conf
+  shell: "[ \"$(cat /opt/local/var/db/mongodb/mongod.lock)\" != \"\" ] || mongod -f /opt/local/etc/mongodb/mongod.conf"
+  register: result
+  changed_when: result.stdout != ''
   become: true
-  args:
-    creates: /opt/local/var/db/mongodb/mongod.lock
 
 - name: Create root user
   shell: mongo admin -u root -p "{{ mongodb_root_password }}" --authenticationDatabase admin --eval "db.getUsers()" | grep "admin.root" || mongo admin --eval "db.createUser({user:'root',pwd:'{{ mongodb_root_password }}',roles:[{role:'root',db:'admin'}]});"

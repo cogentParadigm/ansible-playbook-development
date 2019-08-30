@@ -1,13 +1,9 @@
 ---
 - name: Configure my.cnf
-  ini_file:
-    path: "{{ mariadb_conf_path }}"
-    section: "{{ item.section }}"
-    option: "{{ item.option }}"
-    value: "{{ item.value }}"
-    create: no
+  template:
+    src: "{{ mariadb_conf_template }}"
+    dest: "{{ mariadb_conf_path }}"
     backup: yes
-  with_items: "{{ mariadb_conf_items }}"
   become: yes
 
 - name: Setup data directory

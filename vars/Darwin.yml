@@ -75,6 +75,7 @@ mariadb_socket_path: /opt/local/var/run/mariadb-10.2/mysqld.sock
 mariadb_slow_query_log_file: /opt/local/var/log/mariadb/slow-query.log
 
 php_ini_path: /opt/local/etc/php71/php.ini
+php_composer_path: /opt/local/bin/composer
 php_mysql_default_socket: /opt/local/var/run/mariadb-10.2/mysqld.sock
 
 # specify mas_email and mas_password in local config.yml

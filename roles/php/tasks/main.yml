@@ -16,3 +16,25 @@
     backup: yes
   with_items: "{{ php_ini_settings }}"
   become: yes
+
+- name: Download Composer
+  shell: command -v composer || ./bin/php/install-composer.sh
+  register: result
+  changed_when: result.stdout == ''
+
+- name: Install Composer
+  shell: cp composer.phar {{ php_composer_path }}
+  args:
+    creates: "{{ php_composer_path }}"
+  become: yes
+
+- name: Remove downloaded files
+  file:
+    path: composer.phar
+    state: absent
+
+- name: Update Composer
+  shell: composer selfupdate
+  register: result
+  changed_when: "'Updating' in result.stdout"
+  become: yes
