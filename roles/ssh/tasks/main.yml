@@ -1,0 +1,10 @@
+---
+- name: Generate SSH key
+  openssh_keypair:
+    path: ~/.ssh/id_rsa.pub
+
+- name: Generate SSH config
+  template:
+    src: "{{ ssh_config_template }}"
+    dest: ~/.ssh/config
+    backup: yes

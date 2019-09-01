@@ -1,0 +1,11 @@
+---
+- name: Install NVM
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{ nvm_version }}/install.sh | bash
+  args:
+    creates: ~/.nvm/nvm.sh
+    warn: false
+
+- name: Install Node
+  shell: . ~/.nvm/nvm.sh && nvm install node && nvm use node && nvm alias default node
+  args:
+    creates: ~/.nvm/versions/node

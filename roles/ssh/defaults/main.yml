@@ -1,0 +1,3 @@
+---
+ssh_hosts: []
+ssh_config_template: "config.j2"

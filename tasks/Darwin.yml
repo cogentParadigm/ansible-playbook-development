@@ -31,6 +31,10 @@
   changed_when: "'Changing shell' in result.stderr and 'no changes' not in result.stderr"
   become: true
 
+- name: Configure SSH
+  include_role:
+    name: ssh
+
 - name: Configure SSL
   include_role:
     name: ssl
@@ -50,3 +54,19 @@
 - name: Configure MongoDB
   include_role:
     name: mongodb
+
+- name: Install Node.js
+  include_role:
+    name: nvm
+
+- name: Install Ruby
+  include_role:
+    name: rbenv
+
+- name: Install chromedriver
+  include_role:
+    name: chromedriver
+
+- name: Install mailcatcher
+  include_role:
+    name: mailcatcher

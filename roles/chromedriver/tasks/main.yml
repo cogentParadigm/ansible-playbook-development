@@ -1,0 +1,8 @@
+---
+- name: Install chromedriver
+  unarchive:
+    src: https://chromedriver.storage.googleapis.com/76.0.3809.126/chromedriver_mac64.zip
+    dest: /opt/local/bin
+    copy: no
+    creates: /opt/local/bin/chromedriver
+  become: true

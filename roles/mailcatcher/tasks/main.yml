@@ -1,0 +1,5 @@
+---
+- name: Install mailcatcher
+  shell: gem install mailcatcher && rbenv rehash
+  args:
+    creates: ~/.rbenv/shims/mailcatcher

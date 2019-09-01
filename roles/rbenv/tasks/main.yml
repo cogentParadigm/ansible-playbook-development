@@ -1,0 +1,12 @@
+---
+- name: Configure ~/.bash_profile
+  blockinfile:
+    marker: "# rbenv - {mark} ANSIBLE MANAGED BLOCK"
+    block: "{{ lookup('file', 'templates/.bash_profile.j2') }}"
+    dest: ~/.bash_profile
+    backup: yes
+
+- name: Install Ruby
+  shell: source ~/.bash_profile && rbenv install 2.3.1 && rbenv global 2.3.1
+  args:
+    creates: ~/.rbenv/versions/2.3.1

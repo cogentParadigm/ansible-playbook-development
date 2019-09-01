@@ -1,0 +1,13 @@
+{% for alias, host in ssh_hosts.items() %}
+Host {{ alias }}
+  HostName {{ host.host }}
+{% if host.user is defined %}
+  User {{ host.user }}
+{% endif %}
+{% if host.port is defined %}
+  Port {{ host.port }}
+{% endif %}
+{% if host.identity_file is defined %}
+  IdentityFile {{ host.identity_file }}
+{% endif %}
+{% endfor %}

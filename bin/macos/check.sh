@@ -113,8 +113,8 @@ PATHS[chromedriver]=/opt/local/bin/chromedriver
 PATHS[composer]=/opt/local/bin/composer
 PATHS[mailcatcher]=~/.rbenv/shims/mailcatcher
 PATHS[mysql]=/opt/local/lib/mariadb-10.2/bin/mysql
-PATHS[node]=~/.nvm/versions/node/v11.10.1/bin/node
-PATHS[npm]=~/.nvm/versions/node/v11.10.1/bin/npm
+PATHS[node]=~/.nvm/versions/node/v[0-9\.]*/bin/node
+PATHS[npm]=~/.nvm/versions/node/v[0-9\.]*/bin/npm
 
 FILES+=( /opt/MongooseIM )
 FILES+=( /Library/Developer/CommandLineTools/usr/bin/clang )
@@ -133,8 +133,8 @@ USE_CASES[smysqldump]="Download SQL dumps from remote databases over SSH."
 USE_CASES[unixODBC]="MongooseIM dependency.\nMS SQL Server / ODBC dependency."
 USE_CASES[/opt/MongooseIM]="XMPP applications such as chat."
 
-# source ~/.bash_profile
-# source ~/.bashrc
+source ~/.bash_profile
+source ~/.bashrc
 
 echo -e "\nChecking Mac OS version...\n"
 echo "Installed version: $OS_VERSION"
@@ -194,7 +194,7 @@ done
 echo -e "\nChecking specific command paths...\n"
 
 for K in "${!PATHS[@]}"; do
-  if [ "$(which $K)" == "${PATHS[$K]}" ]; then
+  if [[ "$(which $K)" =~ ${PATHS[$K]} ]]; then
     echo -e "$K: \033[92m$(which $K)\033[0m"
   else
     if [ "$(which $K)" == "" ]; then
