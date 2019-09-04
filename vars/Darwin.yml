@@ -64,6 +64,7 @@ packages:
   - unixODBC
   - unrar
   - watch
+  - watchman
   - wget
 
 apache_conf_path: "/opt/local/etc/apache2"
