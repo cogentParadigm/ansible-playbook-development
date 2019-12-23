@@ -24,7 +24,7 @@
 #   become: true
 
 - name: Enable additional modules
-  shell: grep "^LoadModule {{ item }}_module" {{ apache_conf_path }}/httpd.conf || apxs -a -e -n {{ item }} mod_{{ item }}.so
+  shell: apachectl -M | grep "^ {{ item }}_module" || apxs -a -e -n {{ item }} mod_{{ item }}.so
   args:
     chdir: "{{ apache_modules_path }}"
   register: result
