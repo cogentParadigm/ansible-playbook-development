@@ -1,0 +1,8 @@
+--
+
+- name: Configure Apache
+  include_role:
+    name: apache
+  when: install_apache
+  tags:
+    - apache

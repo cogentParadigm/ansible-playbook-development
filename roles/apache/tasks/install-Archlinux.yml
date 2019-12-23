@@ -1,0 +1,4 @@
+- pacman:
+    name: apache
+    state: present
+  become: true

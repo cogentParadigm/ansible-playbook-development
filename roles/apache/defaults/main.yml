@@ -6,7 +6,7 @@ apache_listen_port_ssl: 443
 apache_conf_path: "/etc/httpd/conf"
 apache_modules_path: "/etc/httpd/modules"
 
-apache_documentroot: "{{ lookup('env', 'HOME') }}/public_html"
+apache_documentroot: "/var/www/html"
 
 apache_conf_items:
   - regexp: "^#?ServerName "

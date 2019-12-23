@@ -11,9 +11,12 @@ packages:
   - git
   - ImageMagick
   - lynx
+  - lzo
   - mariadb-10.2-server
   - mongodb
   - mongo-tools
+  - openjdk8
+  - pdfjam
   - php56
   - php56-apache2handler
   - php56-curl
@@ -66,7 +69,9 @@ packages:
   - watch
   - watchman
   - wget
+  - wkhtmltopdf
 
+apache_documentroot: "{{ lookup('env', 'HOME') }}/public_html"
 apache_conf_path: "/opt/local/etc/apache2"
 apache_modules_path: "/opt/local/lib/apache2/modules"
 
@@ -80,7 +85,7 @@ php_composer_path: /opt/local/bin/composer
 php_mysql_default_socket: /opt/local/var/run/mariadb-10.2/mysqld.sock
 
 # specify mas_email and mas_password in local config.yml
-install_mas_apps: false
+mas_enabled: false
 mas_installed_apps:
   - { id: 497799835, name: "Xcode (10.2)" }
   - { id: 803453959, name: "Slack (4.0.1)" }
