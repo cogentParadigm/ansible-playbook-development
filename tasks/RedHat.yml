@@ -1,5 +1,11 @@
 ---
 
+- name: Install EPEL repository
+  package:
+    name: epel-release
+    state: present
+  become: true
+
 - name: Configure Apache
   include_role:
     name: apache
