@@ -3,6 +3,6 @@
 - name: Configure Apache
   include_role:
     name: apache
-  when: install_apache
+  when: apache_enabled
   tags:
     - apache
