@@ -1,4 +1,4 @@
 - package:
-    name: httpd
+    name: apache2
     state: present
   become: true
