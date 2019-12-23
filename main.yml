@@ -2,9 +2,6 @@
 - hosts: all
   connection: local
 
-  vars_files:
-    - default.config.yml
-
   pre_tasks:
     - include_vars: "{{ os_family_vars }}"
       with_first_found:
@@ -15,7 +12,8 @@
         loop_var: os_family_vars
 
     - include_vars: "{{ local_vars }}"
-      with_fileglob:
+      with_items:
+        - default.config.yml
         - config.yml
       loop_control:
         loop_var: local_vars
