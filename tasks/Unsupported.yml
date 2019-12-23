@@ -1,5 +1,5 @@
 ---
 
 - name: message
-  debug:
+  fail:
     msg: "No tasks found for {{ ansible_os_family }} OS family."
