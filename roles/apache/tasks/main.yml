@@ -51,5 +51,6 @@
   with_first_found:
     - "start-{{ ansible_os_family }}.yml"
     - "start.yml"
+  when: apache_autostart | bool
 
 
