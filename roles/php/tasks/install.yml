@@ -1,0 +1,26 @@
+- package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - php
+    - php-fpm
+    - php-curl
+    - php-exif
+    - php-fpm
+    - php-gd
+    - php-gmp
+    - php-iconv
+    - php-imagick
+    - php-intl
+    - php-mbstring
+    - php-mcrypt
+    - php-mongodb
+    - php-mysql
+    - php-openssl
+    - php-pear
+    - php-posix
+    - php-soap
+    - php-xdebug
+    - php-yaml
+    - php-zip
+  become: true

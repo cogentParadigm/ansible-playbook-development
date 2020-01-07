@@ -47,3 +47,5 @@ aur_packages:
   - php56-pear
   - php56-xdebug
   - solr
+
+php_ini_path: /etc/php/php.ini
