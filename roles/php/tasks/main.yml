@@ -6,10 +6,9 @@
     - "install.yml"
 
 - name: Create php.ini
-  copy:
-    src: "{{ php_ini_path }}-development"
-    dest: "{{ php_ini_path }}"
-    force: no
+  shell: cp {{ php_ini_path }}-development {{ php_ini_path }}
+  args:
+    creates: "{{ php_ini_path }}"
   become: yes
 
 - name: Configure php.ini

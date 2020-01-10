@@ -23,4 +23,5 @@
     - php71-xdebug
     - php71-yaml
     - php71-zip
+    - wget
   become: true

@@ -29,4 +29,5 @@
     - php-pecl-xdebug
     - php-pecl-yaml
     - php-pecl-zip
+    - wget
   become: true
