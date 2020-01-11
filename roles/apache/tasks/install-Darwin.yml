@@ -1,4 +1,7 @@
 - macports:
-    name: apache2
+    name: "{{ item }}"
     state: present
+  with_items:
+    - apache2
+    - fcgi
   become: true

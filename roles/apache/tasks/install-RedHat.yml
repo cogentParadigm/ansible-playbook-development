@@ -5,4 +5,5 @@
     - httpd
     - httpd-devel
     - mod_ssl
+    - fcgi
   become: true

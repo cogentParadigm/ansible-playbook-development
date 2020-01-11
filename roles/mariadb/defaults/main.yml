@@ -1,6 +1,6 @@
 ---
 mariadb_root_password: ""
-mariadb_conf_path: /etc/mysql/my.cnf
+mariadb_conf_path: /etc/my.cnf
 mariadb_conf_template: my.cnf.j2
 mariadb_data_dir: /var/lib/mysql
 mariadb_socket_path: /run/mysqld/mysqld.sock

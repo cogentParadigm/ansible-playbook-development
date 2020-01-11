@@ -1,0 +1,4 @@
+- macports:
+    name: mariadb-10.2-server
+    state: present
+  become: true

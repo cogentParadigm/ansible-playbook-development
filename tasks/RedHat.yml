@@ -6,12 +6,12 @@
     state: present
   become: true
 
-- name: Configure Apache
+- name: Configure MariaDB
   include_role:
-    name: apache
-  when: apache_enabled
+    name: mariadb
+  when: mariadb_enabled
   tags:
-    - apache
+    - mariadb
 
 - name: Configure PHP
   include_role:
@@ -19,3 +19,10 @@
   when: php_enabled
   tags:
     - php
+
+- name: Configure Apache
+  include_role:
+    name: apache
+  when: apache_enabled
+  tags:
+    - apache

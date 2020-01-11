@@ -1,0 +1,4 @@
+---
+ansible_pkg_mgr: yum
+
+mariadb_conf_path: /etc/my.cnf.d/server.cnf
