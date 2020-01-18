@@ -6,11 +6,10 @@
     - "install.yml"
 
 - name: Configure Apache
-  lineinfile:
+  replace:
     dest: "{{ apache_conf_path }}/httpd.conf"
     regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-    state: present
+    replace: "{{ item.line }}"
     backup: yes
   with_items: "{{ apache_conf_items }}"
   become: true
