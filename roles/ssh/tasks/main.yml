@@ -1,7 +1,7 @@
 ---
 - name: Generate SSH key
   openssh_keypair:
-    path: ~/.ssh/id_rsa.pub
+    path: ~/.ssh/id_rsa
 
 - name: Generate SSH config
   template:
