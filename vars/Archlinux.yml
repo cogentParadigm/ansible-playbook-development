@@ -16,7 +16,6 @@ packages:
   - git
   - go
   - imagemagick
-  - mariadb
   - nodejs
   - npm
   - php
