@@ -2,6 +2,8 @@
 
 ansible_pkg_mgr: yay
 
+mariadb_conf_path: /etc/my.cnf.d/server.cnf
+
 packages:
   - apache
   - base-devel

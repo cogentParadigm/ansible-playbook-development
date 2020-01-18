@@ -47,20 +47,12 @@
       value: "{{ mariadb_root_password }}"
   when: mariadb_root_password | bool
 
-- name: Get list of hosts for the anonymous user
-  shell: mysql -NBe "SELECT Host FROM mysql.user WHERE User=''"
-  register: mariadb_anonymous_hosts
-  changed_when: false
-  check_mode: false
-  become: yes
-
 - name: Remove anonymous users
   mysql_user:
     name: ""
-    host: "{{ item }}"
+    host_all: yes
     state: absent
     login_unix_socket: "{{ (mariadb_socket_auth == true) | ternary(mariadb_socket_path, '') }}"
-  with_items: "{{ mariadb_anonymous_hosts.stdout_lines|default([]) }}"
   become: yes
 
 - name: Disallow remote root login
