@@ -4,6 +4,7 @@ mariadb_conf_path: /etc/my.cnf
 mariadb_conf_template: my.cnf.j2
 mariadb_data_dir: /var/lib/mysql
 mariadb_socket_path: /run/mysqld/mysqld.sock
+mariadb_socket_auth: false
 mariadb_max_allowed_packet: 16M
 mariadb_long_query_time: 1
 mariadb_slow_query_log: 1

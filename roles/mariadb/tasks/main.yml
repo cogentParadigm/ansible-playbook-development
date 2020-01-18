@@ -29,7 +29,7 @@
     name: root
     password: "{{ mariadb_root_password }}"
     host_all: yes
-    login_unix_socket: "{{ mariadb_socket_path }}"
+    login_unix_socket: "{{ (mariadb_socket_auth == true) | ternary(mariadb_socket_path, '') }}"
   become: yes
   when: mariadb_root_password | bool
 
@@ -59,7 +59,7 @@
     name: ""
     host: "{{ item }}"
     state: absent
-    login_unix_socket: "{{ mariadb_socket_path }}"
+    login_unix_socket: "{{ (mariadb_socket_auth == true) | ternary(mariadb_socket_path, '') }}"
   with_items: "{{ mariadb_anonymous_hosts.stdout_lines|default([]) }}"
   become: yes
 
@@ -74,5 +74,5 @@
   mysql_db:
     name: test
     state: absent
-    login_unix_socket: "{{ mariadb_socket_path }}"
+    login_unix_socket: "{{ (mariadb_socket_auth == true) | ternary(mariadb_socket_path, '') }}"
   become: yes
