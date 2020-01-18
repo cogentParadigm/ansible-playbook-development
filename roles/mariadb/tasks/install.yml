@@ -1,4 +1,4 @@
 - package:
-    name: mariadb-server
+    name: mariadb
     state: present
   become: true

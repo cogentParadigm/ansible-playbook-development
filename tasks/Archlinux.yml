@@ -1,17 +1,34 @@
 ---
 
-- name: Import GPG keys for PHP56 packages
-  shell: gpg --keyserver hkp://hkps.pool.sks-keyservers.net --recv-keys C2BF0BC433CFC8B3 FE857D9A90D90EC1
-
-- name: Install packages
-  pacman: name={{ packages }} state=present
-  become: true
-
 - name: Install yay
   shell: command -v yay || (git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si)
   register: result
   changed_when: "'installing yay' in result.stdout"
 
-- name: Install AUR packages
-  yay: name={{ item }} state=present
-  with_items: "{{ aur_packages }}"
+- name: Configure SSH
+  include_role:
+    name: ssh
+  when: ssh_enabled
+  tags:
+    - ssh
+
+- name: Configure MariaDB
+  include_role:
+    name: mariadb
+  when: mariadb_enabled
+  tags:
+    - mariadb
+
+- name: Configure PHP
+  include_role:
+    name: php
+  when: php_enabled
+  tags:
+    - php
+
+- name: Configure Apache
+  include_role:
+    name: apache
+  when: apache_enabled
+  tags:
+    - apache
