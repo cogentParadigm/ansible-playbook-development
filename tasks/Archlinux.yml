@@ -1,9 +1,9 @@
 ---
 
-- name: Install yay
-  shell: command -v yay || (git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si)
-  register: result
-  changed_when: "'installing yay' in result.stdout"
+# - name: Install yay
+#   shell: command -v yay || (git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si)
+#   register: result
+#   changed_when: "'installing yay' in result.stdout"
 
 - name: Configure SSH
   include_role:
