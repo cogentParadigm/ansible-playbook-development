@@ -1,0 +1,14 @@
+---
+- name: Install dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - base-devel
+    - git
+  become: true
+
+- name: Install yay
+  shell: command -v yay || (git clone https://aur.archlinux.org/yay.git && cd yay && makepkg --noconfirm -si)
+  register: result
+  changed_when: "'installing yay' in result.stdout"

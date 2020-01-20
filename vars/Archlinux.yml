@@ -1,6 +1,5 @@
 ---
-
-ansible_pkg_mgr: yay
+yay_enabled: false
 
 mariadb_conf_path: /etc/my.cnf.d/server.cnf
 

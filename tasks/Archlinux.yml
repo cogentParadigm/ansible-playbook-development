@@ -1,9 +1,11 @@
 ---
 
-# - name: Install yay
-#   shell: command -v yay || (git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si)
-#   register: result
-#   changed_when: "'installing yay' in result.stdout"
+- name: Install yay
+  include_role:
+    name: yay
+  when: yay_enabled
+  tags:
+    - yay
 
 - name: Configure SSH
   include_role:
@@ -32,3 +34,10 @@
   when: apache_enabled
   tags:
     - apache
+
+- name: Configure MongoDB
+  include_role:
+    name: mongodb
+  when: mongodb_enabled
+  tags:
+    - mongodb
