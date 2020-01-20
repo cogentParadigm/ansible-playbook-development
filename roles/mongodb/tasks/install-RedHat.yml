@@ -8,6 +8,6 @@
   become: yes
 
 - package:
-    name: mongodb
+    name: mongodb-org
     state: present
   become: yes
