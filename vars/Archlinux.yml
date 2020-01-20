@@ -3,6 +3,12 @@ yay_enabled: false
 
 mariadb_conf_path: /etc/my.cnf.d/server.cnf
 
+php_ini_path: /etc/php/php.ini
+
+mongodb_conf_path: /etc/mongodb.conf
+mongodb_lock_path: /var/lib/mongodb/mongod.lock
+mongodb_user: mongodb
+
 packages:
   - apache
   - base-devel
@@ -47,5 +53,3 @@ aur_packages:
   - php56-pear
   - php56-xdebug
   - solr
-
-php_ini_path: /etc/php/php.ini

@@ -34,13 +34,13 @@
   when: mongodb_create_aliases | bool
 
 - name: Start MongoDB
-  shell: "sudo -u mongodb mongod -f {{ mongodb_conf_path }}"
+  shell: "sudo -u {{ mongodb_user }} mongod -f {{ mongodb_conf_path }}"
   args:
     creates: "{{ mongodb_lock_path }}"
   become: true
 
 - name: Ensure MongoDB is started
-  shell: "[ \"$(cat {{ mongodb_lock_path }})\" != \"\" ] || sudo -u mongodb mongod -f {{ mongodb_conf_path }}"
+  shell: "[ \"$(cat {{ mongodb_lock_path }})\" != \"\" ] || sudo -u {{ mongodb_user }} mongod -f {{ mongodb_conf_path }}"
   register: result
   changed_when: result.stdout != ''
   become: true
@@ -55,6 +55,15 @@
 #   lineinfile: dest={{ mongodb_conf_path }} line="auth = true"
 #   become: true
 #   when: "'admin.root' in hasRoot.stdout"
+
+- name: Secure installation
+  replace:
+    dest: "{{ mongodb_conf_path }}"
+    regexp: "^#security:.*"
+    replace: "security:\n  authorization: enabled"
+    backup: yes
+  become: true
+  when: "'admin.root' in hasRoot.stdout"
 
 - name: Create mongorc file
   lineinfile:
