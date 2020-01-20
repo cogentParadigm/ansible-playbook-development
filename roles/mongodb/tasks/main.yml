@@ -36,7 +36,7 @@
 - name: Start MongoDB
   shell: "sudo -u mongodb mongod -f {{ mongodb_conf_path }}"
   args:
-    creates: "{{ mongdb_lock_path }}"
+    creates: "{{ mongodb_lock_path }}"
   become: true
 
 - name: Ensure MongoDB is started
