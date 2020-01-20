@@ -46,10 +46,12 @@
   become: true
 
 - name: Create root user
-  shell: mongo admin -u root -p "{{ mongodb_root_password }}" --authenticationDatabase admin --eval "db.getUsers()" | grep "admin.root" || mongo admin --eval "db.createUser({user:'root',pwd:'{{ mongodb_root_password }}',roles:[{role:'root',db:'admin'}]});"
-  register: hasRoot
-  changed_when: "'Successfully added user' in hasRoot.stdout"
-  failed_when: "'admin.root' not in hasRoot.stdout"
+  mongodb_user:
+    database: admin
+    name: root
+    password: "{{ mongodb_root_password }}"
+    roles: root
+    state: present
 
 # - name: Secure installation
 #   lineinfile: dest={{ mongodb_conf_path }} line="auth = true"
@@ -63,7 +65,6 @@
     replace: "security:\n  authorization: enabled"
     backup: yes
   become: true
-  when: "'admin.root' in hasRoot.stdout"
 
 - name: Create mongorc file
   lineinfile:
@@ -71,5 +72,4 @@
     line: db.getSiblingDB("admin").auth("root", "{{ mongodb_root_password }}");
     state: present
     create: yes
-  when: "'admin.root' in hasRoot.stdout"
 
