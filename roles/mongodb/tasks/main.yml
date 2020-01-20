@@ -34,7 +34,7 @@
   when: mongodb_create_aliases | bool
 
 - name: Start MongoDB
-  shell: sudo -u mongodb mongod -f {{ mongodb_conf_path }}"
+  shell: "sudo -u mongodb mongod -f {{ mongodb_conf_path }}"
   args:
     creates: "{{ mongdb_lock_path }}"
   become: true
