@@ -6,6 +6,13 @@
     state: present
   become: true
 
+- name: Configure SSH
+  include_role:
+    name: ssh
+  when: ssh_enabled
+  tags:
+    - ssh
+
 - name: Configure MariaDB
   include_role:
     name: mariadb
@@ -26,3 +33,10 @@
   when: apache_enabled
   tags:
     - apache
+
+- name: Configure MongoDB
+  include_role:
+    name: mongodb
+  when: mongodb_enabled
+  tags:
+    - mongodb
