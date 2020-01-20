@@ -1,21 +1,27 @@
 ---
+- name: Install MongoDB
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "install-{{ ansible_os_family }}.yml"
+    - "install.yml"
+
 - name: Check root password
   assert:
     that: mongodb_root_password != ''
     fail_msg: "You must specify a root password for MongoDB."
     quiet: yes
 
-- name: Create /opt/local/etc/mongodb
+- name: Create conf directory
   file:
-    path: /opt/local/etc/mongodb
+    path: "{{ mongodb_conf_path | dirname }}"
     recurse: yes
     state: directory
   become: true
 
-- name: Create /opt/local/etc/mongodb/mongod.conf
+- name: Create conf file
   template:
     src: templates/mongod.conf.j2
-    dest: /opt/local/etc/mongodb/mongod.conf
+    dest: "{{ mongodb_conf_path }}"
     force: no
   become: true
 
@@ -25,9 +31,10 @@
     block: "{{ lookup('file', 'templates/.bash_profile.j2') }}"
     dest: ~/.bash_profile
     backup: yes
+  when: mongodb_create_aliases | bool
 
 - name: Start MongoDB
-  shell: "[ \"$(cat /opt/local/var/db/mongodb/mongod.lock)\" != \"\" ] || mongod -f /opt/local/etc/mongodb/mongod.conf"
+  shell: "[ \"$(cat {{ mongodb_lock_path }})\" != \"\" ] || sudo -u mongodb mongod -f {{ mongodb_conf_path }}"
   register: result
   changed_when: result.stdout != ''
   become: true
@@ -38,10 +45,10 @@
   changed_when: "'Successfully added user' in hasRoot.stdout"
   failed_when: "'admin.root' not in hasRoot.stdout"
 
-- name: Secure installation
-  lineinfile: dest=/opt/local/etc/mongodb/mongod.conf line="auth = true"
-  become: true
-  when: "'admin.root' in hasRoot.stdout"
+# - name: Secure installation
+#   lineinfile: dest={{ mongodb_conf_path }} line="auth = true"
+#   become: true
+#   when: "'admin.root' in hasRoot.stdout"
 
 - name: Create mongorc file
   lineinfile:

@@ -1,2 +1,5 @@
 ---
 mongodb_root_password: ""
+mongodb_conf_path: /etc/mongodb.conf
+mongodb_lock_path: /var/lib/mongodb/mongod.lock
+mongodb_create_aliases: false

@@ -1,9 +1,9 @@
 # Custom mongostart scripts starting mongo with configuration file
-alias mongostart="sudo mongod -f /opt/local/etc/mongodb/mongod.conf"
+alias mongostart="sudo mongod -f {{ mongodb_conf_path }}"
 
 # Custom mongostop alias killing mongo process
 mongostop_func () {
-local mongopid=`sudo less /opt/local/var/db/mongodb/mongod.lock`;
+local mongopid=`sudo less {{ mongodb_lock_path }}`;
 if [[ $mongopid =~ [[:digit:]] ]]; then
   sudo kill -15 $mongopid;
   echo mongod process $mongopid terminated;

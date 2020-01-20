@@ -1,0 +1,3 @@
+- yay:
+    name: mongodb
+    state: present

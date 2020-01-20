@@ -84,6 +84,10 @@ php_ini_path: /opt/local/etc/php71/php.ini
 php_composer_path: /opt/local/bin/composer
 php_mysql_default_socket: /opt/local/var/run/mariadb-10.2/mysqld.sock
 
+mongodb_conf_path: /opt/local/etc/mongodb/mongod.conf
+mongodb_lock_path: /opt/local/var/db/mongodb/mongod.lock
+mongodb_create_aliases: true
+
 # specify mas_email and mas_password in local config.yml
 mas_enabled: false
 mas_installed_apps:
