@@ -12,5 +12,9 @@
     state: present
   with_items:
     - mongodb-org
-    - python-pymongo
+    - python2-pip
+  become: yes
+
+- pip:
+    name: pymongo
   become: yes
