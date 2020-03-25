@@ -10,11 +10,11 @@ mariadb_long_query_time: 1
 mariadb_slow_query_log: 1
 mariadb_slow_query_log_file: slow-query.log
 mariadb_encryption_conf_dir: /etc/mysql/encryption
-mariadb_encrypt_tmp_files: ON
-mariadb_encrypt_binlog: ON
-mariadb_innodb_encrypt_tables: OFF
-mariadb_innodb_encrypt_temporary_tables: OFF
-mariadb_innodb_encrypt_log: ON
+mariadb_encrypt_tmp_files: "ON"
+mariadb_encrypt_binlog: "ON"
+mariadb_innodb_encrypt_tables: "OFF"
+mariadb_innodb_encrypt_temporary_tables: "OFF"
+mariadb_innodb_encrypt_log: "ON"
 mariadb_innodb_encryption_threads: 4
 mariadb_innodb_encryption_rotate_key_age: 1
 mariadb_conf_items:
