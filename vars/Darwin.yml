@@ -79,6 +79,7 @@ mariadb_conf_path: /opt/local/etc/mariadb-10.2/my.cnf
 mariadb_data_dir: /opt/local/var/db/mariadb-10.2
 mariadb_socket_path: /opt/local/var/run/mariadb-10.2/mysqld.sock
 mariadb_slow_query_log_file: /opt/local/var/log/mariadb/slow-query.log
+mariadb_encryption_conf_dir: /opt/local/etc/mariadb-10.2/encryption
 
 php_ini_path: /opt/local/etc/php71/php.ini
 php_composer_path: /opt/local/bin/composer

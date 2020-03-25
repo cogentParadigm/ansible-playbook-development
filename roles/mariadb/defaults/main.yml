@@ -9,6 +9,14 @@ mariadb_max_allowed_packet: 16M
 mariadb_long_query_time: 1
 mariadb_slow_query_log: 1
 mariadb_slow_query_log_file: slow-query.log
+mariadb_encryption_conf_dir: /etc/mysql/encryption
+mariadb_encrypt_tmp_files: ON
+mariadb_encrypt_binlog: ON
+mariadb_innodb_encrypt_tables: OFF
+mariadb_innodb_encrypt_temporary_tables: OFF
+mariadb_innodb_encrypt_log: ON
+mariadb_innodb_encryption_threads: 4
+mariadb_innodb_encryption_rotate_key_age: 1
 mariadb_conf_items:
   - section: mysqld
     option: sql_mode
@@ -25,3 +33,33 @@ mariadb_conf_items:
   - section: mysqld
     option: slow_query_log_file
     value: "{{ mariadb_slow_query_log_file }}"
+  - section: mariadb
+    option: plugin_load_add
+    value: "file_key_management"
+  - section: mariadb
+    option: loose_file_key_management_filename
+    value: "{{ mariadb_encryption_conf_dir }}/keyfile"
+  - section: mariadb
+    option: loose_file_key_management_encryption_algorithm
+    value: "AES_CTR"
+  - section: mariadb
+    option: encrypt_tmp_files
+    value: "{{ mariadb_encrypt_tmp_files }}"
+  - section: mariadb
+    option: encrypt_binlog
+    value: "{{ mariadb_encrypt_binlog }}"
+  - section: mariadb
+    option: innodb_encrypt_tables
+    value: "{{ mariadb_innodb_encrypt_tables }}"
+  - section: mariadb
+    option: innodb_encrypt_temporary_tables
+    value: "{{ mariadb_innodb_encrypt_temporary_tables }}"
+  - section: mariadb
+    option: innodb_encrypt_log
+    value: "{{ mariadb_innodb_encrypt_log }}"
+  - section: mariadb
+    option: innodb_encryption_threads
+    value: "{{ mariadb_innodb_encryption_threads }}"
+  - section: mariadb
+    option: innodb_encryption_rotate_key_age
+    value: "{{ mariadb_innodb_encryption_rotate_key_age }}"

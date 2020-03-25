@@ -12,6 +12,18 @@
     backup: yes
   become: yes
 
+- name: Create encryption keyfile directory
+  file:
+    path: "{{ mariadb_encryption_conf_dir }}"
+    state: directory
+  become: yes
+
+- name: Create encryption keyfile
+  shell: echo "1;$(openssl rand -hex 32)" >> {{ mariadb_encryption_conf_dir }}/keyfile
+  args:
+    creates: "{{ mariadb_encryption_conf_dir }}/keyfile"
+  become: true
+
 - name: Setup data directory
   shell: "[ $(ls -1q {{ mariadb_data_dir }} | wc -l) -gt '0' ] || mysql_install_db --user=mysql --datadir={{ mariadb_data_dir }}"
   register: result
