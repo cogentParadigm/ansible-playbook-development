@@ -2,26 +2,26 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - php71
-    - php71-fpm
-    - php71-curl
-    - php71-exif
-    - php71-fpm
-    - php71-gd
-    - php71-gmp
-    - php71-iconv
-    - php71-imagick
-    - php71-intl
-    - php71-mbstring
-    - php71-mcrypt
-    - php71-mongodb
-    - php71-mysql
-    - php71-openssl
-    - php71-pear
-    - php71-posix
-    - php71-soap
-    - php71-xdebug
-    - php71-yaml
-    - php71-zip
+    - php{{ php_version | replace('.', '') }}
+    - php{{ php_version | replace('.', '') }}-fpm
+    - php{{ php_version | replace('.', '') }}-curl
+    - php{{ php_version | replace('.', '') }}-exif
+    - php{{ php_version | replace('.', '') }}-fpm
+    - php{{ php_version | replace('.', '') }}-gd
+    - php{{ php_version | replace('.', '') }}-gmp
+    - php{{ php_version | replace('.', '') }}-iconv
+    - php{{ php_version | replace('.', '') }}-imagick
+    - php{{ php_version | replace('.', '') }}-intl
+    - php{{ php_version | replace('.', '') }}-mbstring
+    - php{{ php_version | replace('.', '') }}-mcrypt
+    - php{{ php_version | replace('.', '') }}-mongodb
+    - php{{ php_version | replace('.', '') }}-mysql
+    - php{{ php_version | replace('.', '') }}-openssl
+    - php{{ php_version | replace('.', '') }}-pear
+    - php{{ php_version | replace('.', '') }}-posix
+    - php{{ php_version | replace('.', '') }}-soap
+    - php{{ php_version | replace('.', '') }}-xdebug
+    - php{{ php_version | replace('.', '') }}-yaml
+    - php{{ php_version | replace('.', '') }}-zip
     - wget
   become: true

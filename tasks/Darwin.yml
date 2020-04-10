@@ -15,58 +15,88 @@
   lineinfile: dest=/etc/paths.d/00-macports line="/opt/local/bin" state=present create=yes
   become: true
 
-- name: Install App Store applications
-  include_role:
-    name: mas
-  when: mas_enabled and mas_installed_apps
-
-- name: Install packages
-  macports: name={{ item }} state=present
-  with_items: "{{ packages }}"
-  become: true
-
 - name: Set login shell
   shell: 'chsh -s /opt/local/bin/bash {{ ansible_user_id }}'
   register: result
   changed_when: "'Changing shell' in result.stderr and 'no changes' not in result.stderr"
   become: true
 
-- name: Configure SSH
+- name: Install App Store applications
+  include_role:
+    name: mas
+  when: mas_enabled and mas_installed_apps
+
+# - name: Install packages
+#   macports: name={{ item }} state=present
+#   with_items: "{{ packages }}"
+#   become: true
+
+- name: SSH
   include_role:
     name: ssh
+  when: ssh_enabled
+  tags:
+    - ssh
 
-- name: Configure SSL
+- name: SSL
   include_role:
     name: ssl
+  when: ssl_enabled
+  tags:
+    - ssl
 
-- name: Configure MariaDB
+- name: MariaDB
   include_role:
     name: mariadb
+  when: mariadb_enabled
+  tags:
+    - mariadb
 
-- name: Configure PHP
+- name: PHP
   include_role:
     name: php
+  when: php_enabled
+  tags:
+    - php
 
-- name: Configure Apache
+- name: Apache
   include_role:
     name: apache
+  when: apache_enabled
+  tags:
+    - apache
 
-- name: Configure MongoDB
+- name: MongoDB
   include_role:
     name: mongodb
+  when: mongodb_enabled
+  tags:
+    - mongodb
 
-- name: Install Node.js
+- name: NVM (Node.js)
   include_role:
     name: nvm
+  when: nvm_enabled
+  tags:
+    - nvm
 
-- name: Install Ruby
+- name: rbenv (Ruby)
   include_role:
     name: rbenv
+  when: rbenv_enabled
+  tags:
+    - rbenv
 
-- name: Install chromedriver
+- name: chromedriver
   include_role:
     name: chromedriver
+  when: chromedriver_enabled
+  tags:
+    -chromedriver
 
-- name: Install mailcatcher
+- name: mailcatcher
   include_role:
     name: mailcatcher
+  when: mailcatcher_enabled
+  tags:
+    -mailcatcher
