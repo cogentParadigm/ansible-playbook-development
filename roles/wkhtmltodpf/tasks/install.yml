@@ -1,0 +1,37 @@
+---
+- name: Install dependencies
+- package:
+    name: "{{ wkhtmltopdf_pkg }}"
+    state: present
+  with_items: "{{ wkhtmltopdf_pkgs }}"
+  loop_control:
+    loop_var: wkhtmltopdf_pkg
+  become: true
+
+- name: Install wkhtmltopdf
+  shell: |
+    wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/{{ wkhtmltopdf_version }}/wkhtmltox-{{ wkhtmltopdf_version }}_linux-generic-amd64.tar.xz
+    unxz wkhtmltox-{{ wkhtmltopdf_version }}_linux-generic-amd64.tar.xz
+    tar -xvf wkhtmltox-{{ wkhtmltopdf_version }}_linux-generic-amd64.tar
+    mv wkhtmltox/bin/* /usr/local/bin/
+    rm -rf wkhtmltox
+    rm -f wkhtmltox-{{ wkhtmltopdf_version }}_linux-generic-amd64.tar
+  args:
+    creates: /usr/local/bin/wkhtmltopdf
+  become: true
+
+- name: Install pdfjam
+  shell: |
+    wget https://github.com/DavidFirth/pdfjam/archive/v{{ wkhtmltopdf_pdfjam_version }}.tar.gz
+    tar -xzf v{{ wkhtmltopdf_pdfjam_version }}.tar.gz
+    cp pdfjam-{{ wkhtmltopdf_pdfjam_version }}/bin/* /usr/local/bin/
+    rm -rf pdfjam-{{ wkhtmltopdf_pdfjam_version }}
+    rm -f v{{ wkhtmltopdf_pdfjam_version }}.tar.gz
+    wget https://github.com/DavidFirth/pdfjam-extras/archive/master.tar.gz
+    tar -xzf master.tar.gz
+    cp pdfjam-extras-master/bin/* /usr/local/bin/
+    rm -rf pdfjam-extras-master
+    rm -f master.tar.gz
+  args:
+    creates: /usr/local/bin/pdfjoin
+  become: true

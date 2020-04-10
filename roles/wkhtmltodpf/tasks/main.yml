@@ -1,0 +1,13 @@
+---
+- name: Install wkhtmltopdf
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "install-{{ ansible_os_family }}.yml"
+    - "install.yml"
+
+- name: Create fontconfig
+  template:
+    src: "{{ wkhtmltopdf_fontconfig_template }}"
+    dest: "{{ wkhtmltopdf_fontconfig_path }}"
+    backup: yes
+  become: true
