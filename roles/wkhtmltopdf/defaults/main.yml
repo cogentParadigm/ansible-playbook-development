@@ -1,6 +1,7 @@
 ---
 wkhtmltopdf_version: "0.12.3"
 wkhtmltopdf_pdfjam_version: "3.03"
-wkhtmltopdf_texlive_pkg: texlive
+wkhtmltopdf_pkgs:
+  - texlive
 wkhtmltopdf_fontconfig_path: "/etc/fonts/conf.d/10-wkhtmltopdf.conf"
 wkhtmltopdf_fontconfig_template: "10-wkhtmltopdf.conf.j2"

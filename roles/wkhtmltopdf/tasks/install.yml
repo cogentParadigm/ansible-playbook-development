@@ -1,8 +1,11 @@
 ---
 - name: Install dependencies
-- package:
-    name: "{{ wkhtmltopdf_texlive_pkg }}"
+  package:
+    name: "{{ wkhtmltopdf_pkg }}"
     state: present
+  with_items: "{{ wkhtmltopdf_pkgs }}"
+  loop_control:
+    loop_var: wkhtmltopdf_pkg
   become: true
 
 - name: Install wkhtmltopdf
