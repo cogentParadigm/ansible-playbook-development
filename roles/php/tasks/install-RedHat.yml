@@ -27,13 +27,14 @@
     - php-mbstring
     - php-mcrypt
     - php-mysqlnd
+    - php-pecl-gnupg
     - php-pecl-imagick
     - php-pecl-mongodb
-    - php-soap
-    - php-pecl-gnupg
+    - php-pecl-redis
     - php-pecl-xdebug
     - php-pecl-yaml
     - php-pecl-zip
+    - php-soap
     - php-xml
     - wget
   loop_control:
