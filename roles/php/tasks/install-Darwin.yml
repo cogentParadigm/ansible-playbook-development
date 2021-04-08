@@ -18,6 +18,7 @@
     - php{{ php_version | replace('.', '') }}-mysql
     - php{{ php_version | replace('.', '') }}-openssl
     - php{{ php_version | replace('.', '') }}-pear
+    - php{{ php_version | replace('.', '') }}-pgsql
     - php{{ php_version | replace('.', '') }}-posix
     - php{{ php_version | replace('.', '') }}-soap
     - php{{ php_version | replace('.', '') }}-xdebug

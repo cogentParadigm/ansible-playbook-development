@@ -19,6 +19,7 @@
     - php-mysql
     - php-openssl
     - php-pear
+    - php-pgsql
     - php-posix
     - php-soap
     - php-xdebug
