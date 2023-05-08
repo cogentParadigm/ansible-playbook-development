@@ -22,6 +22,7 @@
   copy:
     src: "bin/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
+    mode: preserve
   with_items:
     - docker-ip
     - docker-ip-replace

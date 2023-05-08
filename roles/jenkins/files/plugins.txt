@@ -19,7 +19,7 @@ commons-lang3-api:3.12.0-36.vd97de6465d5b_
 commons-text-api:1.10.0-36.vc008c8fcda_7b_
 conditional-buildstep:1.4.2
 configuration-as-code-support:1.19
-configuration-as-code:1569.vb_72405b_80249
+configuration-as-code:1625.v27444588cc3d
 credentials-binding:604.vb_64480b_c56ca_
 credentials:1224.vc23ca_a_9a_2cb_0
 data-tables-api:1.13.3-3

@@ -15,6 +15,7 @@
   copy:
     src: "bin/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
+    mode: preserve
   with_items:
     - jenkins-plugin-cli
     - ssh-async
@@ -29,5 +30,5 @@
   become: true
 
 - name: Install Plugins
-  shell: jenkins-plugin-cli -f roles/jenkins/files/plugins.txt
+  shell: /usr/local/bin/jenkins-plugin-cli -w /usr/share/java/jenkins.war -d /var/lib/jenkins/plugins -f roles/jenkins/files/plugins.txt
   become: true
