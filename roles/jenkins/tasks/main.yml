@@ -13,12 +13,13 @@
 
 - name: Copy scripts
   copy:
-    src: "roles/jenkins/bin/{{ item }}"
+    src: "bin/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
   with_items:
     - jenkins-plugin-cli
     - ssh-async
     - ssh-wait
+  become: true
 
 - name: Install Jenkins Plugin Manager
   shell: |
