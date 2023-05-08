@@ -1,6 +1,8 @@
 ---
 ansible_pkg_mgr: yum
 
+install_epel: true
+
 mariadb_conf_path: /etc/my.cnf.d/server.cnf
 mariadb_socket_path: /var/lib/mysql/mysql.sock
 php_mysql_default_socket: /var/lib/mysql/mysql.sock

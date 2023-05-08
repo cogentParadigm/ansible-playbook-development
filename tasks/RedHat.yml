@@ -5,6 +5,7 @@
     name: epel-release
     state: present
   become: true
+  when: install_epel
 
 - name: SSH
   include_role:
