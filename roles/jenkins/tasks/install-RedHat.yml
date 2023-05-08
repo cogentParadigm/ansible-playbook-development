@@ -1,0 +1,15 @@
+- name: Add repository
+  yum_repository:
+    name: jenkins
+    description: Jenkins Repository
+    baseurl: http://pkg.jenkins-ci.org/redhat-stable/
+    gpgcheck: yes
+    gpgkey: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+  become: yes
+
+- package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - jenkins
+  become: yes

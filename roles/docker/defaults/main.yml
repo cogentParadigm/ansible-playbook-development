@@ -1,0 +1,3 @@
+---
+docker_create_bash_aliases: true
+docker_bash_aliases_template: ".bash_aliases.j2"

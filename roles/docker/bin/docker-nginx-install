@@ -1,0 +1,8 @@
+#!/bin/bash
+PROJECT_NAME=$(grep "COMPOSE_PROJECT_NAME" .env | cut -d'=' -f 2)
+DOMAIN=$(grep "server_name" app/etc/docker/nginx/proxy.conf | head -n1 | awk '{ print substr($2, 1, length($2)-1) }')
+
+sudo docker-ip-replace "${PROJECT_NAME}_apache_1" app/etc/docker/nginx/proxy.conf
+docker cp app/etc/docker/nginx/proxy.conf "nginx:/etc/nginx/conf.d/${DOMAIN}.conf"
+docker restart nginx
+

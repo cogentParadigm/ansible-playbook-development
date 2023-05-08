@@ -1,0 +1,6 @@
+#!/bin/bash
+docker run --name nginx --network host -d nginx
+docker exec -t nginx mkdir -p /etc/ssl/certs
+docker cp ~/.docker/certs/server.crt nginx:/etc/ssl/certs/
+docker cp ~/.docker/certs/server.key nginx:/etc/ssl/certs/
+docker cp ~/.docker/certs/rootCA.pem nginx:/etc/ssl/certs/

@@ -1,0 +1,6 @@
+---
+- service:
+    name: jenkins
+    state: started
+    enabled: true
+  become: true

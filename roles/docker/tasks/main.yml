@@ -1,0 +1,29 @@
+---
+- name: Install Docker
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "install-{{ ansible_os_family }}.yml"
+    - "install.yml"
+
+- name: Start Docker
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "start-{{ ansible_os_family }}.yml"
+    - "start.yml"
+
+- name: Copy .bash_aliases
+  template:
+    src: "{{ docker_bash_aliases_template }}"
+    dest: ~/.bash_aliases
+    backup: yes
+  when: docker_create_bash_aliases | bool
+
+- name: Copy scripts
+  copy:
+    src: "bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+  with_items:
+    - docker-ip
+    - docker-ip-replace
+    - docker-nginx-install
+    - docker-nginx-start

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Usage: ssh-async [host] [command] [logfile]
+# command should contain bg-wrapper or similar
+PID=$(ssh $1 "$2 $3")
+ssh-wait $1 $PID $3

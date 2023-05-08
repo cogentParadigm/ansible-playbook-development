@@ -1,0 +1,35 @@
+export PHP_USER=$(id -un)
+export PHP_GROUP=$(id -gn)
+export PHP_UID=$(id -u)
+export PHP_GID=$(id -g)
+export DOCKER_BUILDKIT=1
+export POSTGRES_PASSWORD=root
+
+alias d-up='docker-compose up -d'
+alias d-down='docker-compose down'
+alias d-start='docker-compose start'
+alias d-stop='docker-compose stop'
+alias d-restart='docker-compose restart'
+alias d-rm='docker-compose rm'
+alias d-logs='docker-compose logs'
+alias d-tail='docker-compose logs --tail=50'
+alias d-follow='docker-compose logs --follow'
+alias d-publish='d-up && docker-nginx-install'
+alias dx='docker-compose exec'
+alias php='docker-compose exec -u ${PHP_UID}:${PHP_GID} php php'
+alias phpx='docker-compose exec -u ${PHP_UID}:${PHP_GID} php'
+alias phpsh='docker-compose exec -u ${PHP_UID}:${PHP_GID} php bash'
+alias composer='docker-compose exec -u ${PHP_UID}:${PHP_GID} php composer'
+alias behat='docker-compose exec -u ${PHP_UID}:${PHP_GID} php vendor/bin/behat --colors'
+alias phpunit='docker-compose exec -u ${PHP_UID}:${PHP_GID} php vendor/bin/phpunit'
+alias phpspec='docker-compose exec -u ${PHP_UID}:${PHP_GID} php vendor/bin/phpspec'
+alias phpcs='docker-compose exec -u ${PHP_UID}:${PHP_GID} php vendor/bin/phpcs --extensions=php --standard=vendor/starbug/standard/phpcs.xml'
+alias phpcbf='docker-compose exec -u ${PHP_UID}:${PHP_GID} php vendor/bin/phpcbf --extensions=php --standard=vendor/starbug/standard/phpcs.xml'
+alias phan='docker-compose exec -u ${PHP_UID}:${PHP_GID} php vendor/bin/phan'
+alias mysql='docker-compose exec mariadb mysql'
+alias mysqlimport='docker-compose exec -T mariadb mysql'
+alias mysqldump='docker-compose exec -T mariadb mysqldump'
+alias psql='docker-compose exec postgres psql'
+alias psqlimport='docker-compose exec -T postgres psql'
+alias pg_dump='docker-compose exec -T postgres pg_dump'
+alias redis-cli='docker-compose exec redis redis-cli'

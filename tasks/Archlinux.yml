@@ -48,3 +48,31 @@
   when: mongodb_enabled
   tags:
     - mongodb
+
+- name: wkhtmltopdf
+  include_role:
+    name: wkhtmltopdf
+  when: wkhtmltopdf_enabled
+  tags:
+    - wkhtmltopdf
+
+- name: Docker
+  include_role:
+    name: docker
+  when: docker_enabled
+  tags:
+    - docker
+
+- name: jenkins
+  include_role:
+    name: jenkins
+  when: jenkins_enabled
+  tags:
+    - jenkins
+
+- name: yq
+  include_role:
+    name: yq
+  when: yq_enabled
+  tags:
+    - yq

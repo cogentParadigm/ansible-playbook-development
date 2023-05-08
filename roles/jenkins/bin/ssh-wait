@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Usage: ssh-wait [host] [pid] [logfile]
+while ssh $1 "ps -p $2"; do
+  sleep 60
+done
+ssh $1 "cat $3 | jq -r .output | base64 -d"
+ssh $1 "\$(exit \$(cat $3 | jq -r .result))"

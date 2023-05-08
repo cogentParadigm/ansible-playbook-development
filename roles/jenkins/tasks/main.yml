@@ -1,0 +1,32 @@
+---
+- name: Install Jenkins
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "install-{{ ansible_os_family }}.yml"
+    - "install.yml"
+
+- name: Start Jenkins
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "start-{{ ansible_os_family }}.yml"
+    - "start.yml"
+
+- name: Copy scripts
+  copy:
+    src: "roles/jenkins/bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+  with_items:
+    - jenkins-plugin-cli
+    - ssh-async
+    - ssh-wait
+
+- name: Install Jenkins Plugin Manager
+  shell: |
+    curl -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/{{ jenkins_plugin_cli_version }}/jenkins-plugin-manager-{{ jenkins_plugin_cli_version }}.jar -o /opt/jenkins-plugin-manager.jar
+  args:
+    creates: /opt/jenkins-plugin-manager.jar
+  become: true
+
+- name: Install Plugins
+  shell: jenkins-plugin-cli -f roles/jenkins/files/plugins.txt
+  become: true
