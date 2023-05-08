@@ -27,3 +27,4 @@
     - docker-ip-replace
     - docker-nginx-install
     - docker-nginx-start
+  become: true
