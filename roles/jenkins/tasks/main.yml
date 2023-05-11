@@ -5,12 +5,6 @@
     - "install-{{ ansible_os_family }}.yml"
     - "install.yml"
 
-- name: Start Jenkins
-  include_tasks: "{{ item }}"
-  with_first_found:
-    - "start-{{ ansible_os_family }}.yml"
-    - "start.yml"
-
 - name: Copy scripts
   copy:
     src: "bin/{{ item }}"
@@ -32,3 +26,17 @@
 - name: Install Plugins
   shell: /usr/local/bin/jenkins-plugin-cli -w /usr/share/java/jenkins.war -d /var/lib/jenkins/plugins -f roles/jenkins/files/plugins.txt
   become: true
+
+- name: Add YAML configuration
+  template:
+    src: "{{ jenkins_casc_template }}"
+    dest: "/var/lib/jenkins/jenkins.yaml"
+    backup: yes
+  when: jenkins_create_casc | bool
+  become: true
+
+- name: Start Jenkins
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "start-{{ ansible_os_family }}.yml"
+    - "start.yml"

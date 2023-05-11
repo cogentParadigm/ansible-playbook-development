@@ -1,2 +1,9 @@
 ---
 jenkins_plugin_cli_version: "2.12.11"
+
+jenkins_create_casc: false
+jenkins_casc_template: "jenkins.yaml.j2"
+
+jenkins_user_id: admin
+jenkins_user_password: admin
+jenkins_credentials: []

@@ -1,0 +1,53 @@
+jenkins:
+  numExecutors: 3
+  authorizationStrategy:
+    projectMatrix:
+      permissions:
+      - "Overall/Administer:{{ jenkins_user_id }}"
+      - "Overall/Read:authenticated"
+  remotingSecurity:
+    enabled: true
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "{{ jenkins_user_id }}"
+        password: {{ jenkins_user_password }}
+  slaveAgentPort: -1
+security:
+  sSHD:
+    port: -1
+unclassified:
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+{% for credential in jenkins_credentials %}
+{% if credential.type is "basicSSHUserPrivateKey" %}
+      - basicSSHUserPrivateKey:
+          id: "{{ credential.id }}"
+          passphrase: "{{ credential.passphrase }}"
+          privateKeySource:
+            directEntry:
+              privateKey: "{{ credential.privateKey }}"
+          scope: GLOBAL
+          username: "{{ credential.username }}"
+          usernameSecret: true
+{% elseif credential.type is "usernamePassword" %}
+      - usernamePassword:
+          description: "{{ credential.id }}"
+          id: "{{ credential.id }}"
+          password: "{{ credential.password }}"
+          scope: GLOBAL
+          username: "{{ credential.username }}"
+          usernameSecret: true
+{% elseif credential.type is "string" %}
+      - string:
+          id: "{{ credential.id }}"
+          scope: GLOBAL
+          secret: "{{ credential.secret }}"
+{% endif %}
