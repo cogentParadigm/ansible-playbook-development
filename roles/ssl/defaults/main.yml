@@ -5,3 +5,9 @@ ssl_certificate_dn_city: ""
 ssl_certificate_dn_organization: ""
 ssl_certificate_dn_organization_unit: ""
 ssl_certificate_dn_email: ""
+
+ssl_hosts:
+  - "localhost"
+  - "local.com"
+  - "*.local.com"
+  - "*.*.local.com"
