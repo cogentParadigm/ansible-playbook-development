@@ -24,7 +24,9 @@
   become: true
 
 - name: Install Plugins
-  shell: /usr/local/bin/jenkins-plugin-cli -w /usr/share/java/jenkins.war -d /var/lib/jenkins/plugins -f roles/jenkins/files/plugins.txt
+  shell: |
+    /usr/local/bin/jenkins-plugin-cli -w /usr/share/java/jenkins.war -d /var/lib/jenkins/plugins -f roles/jenkins/files/plugins.txt
+    chown -R jenkins:jenkins /var/lib/jenkins/plugins
   become: true
 
 - name: Add YAML configuration

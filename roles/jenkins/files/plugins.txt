@@ -2,6 +2,7 @@ ace-editor:1.1
 analysis-model-api:11.1.0
 antisamy-markup-formatter:159.v25b_c67cd35fb_
 apache-httpcomponents-client-4-api:4.5.14-150.v7a_b_9d17134a_5
+atlassian-jira-software-cloud:2.0.7
 authentication-tokens:1.53.v1c90fd9191a_b_
 bitbucket-build-status-notifier:1.4.2
 bootstrap5-api:5.2.2-2
@@ -18,6 +19,7 @@ command-launcher:90.v669d7ccb_7c31
 commons-lang3-api:3.12.0-36.vd97de6465d5b_
 commons-text-api:1.10.0-36.vc008c8fcda_7b_
 conditional-buildstep:1.4.2
+configuration-as-code-groovy:1.1
 configuration-as-code-support:1.19
 configuration-as-code:1625.v27444588cc3d
 credentials-binding:604.vb_64480b_c56ca_
