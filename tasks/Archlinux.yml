@@ -14,6 +14,13 @@
   tags:
     - ssh
 
+- name: SSL
+  include_role:
+    name: ssl
+  when: ssl_enabled
+  tags:
+    - ssl
+
 - name: MariaDB
   include_role:
     name: mariadb
