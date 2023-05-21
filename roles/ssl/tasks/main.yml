@@ -8,8 +8,8 @@
 
 - name: Create root CA
   shell: |
-    openssl genrsa -des3 -out rootCA.key 2048
-    openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem
+    openssl genrsa -des3 -out rootCA.key -passout 'pass:{{ ssl_passphrase }}' 2048
+    openssl req -x509 -new -nodes -key rootCA.key -passin 'pass:{{ ssl_passphrase }}' -subj "/C={{ ssl_certificate_dn_country }}/ST={{ ssl_certificate_dn_state }}/L={{ ssl_certificate_dn_city }}/O={{ ssl_certificate_dn_organization }}/CN={{ ssl_certificate_dn_common_name }}" -sha256 -days 1024 -out rootCA.pem
   args:
     chdir: /etc/ssl/certs
     creates: /etc/ssl/certs/rootCA.pem
@@ -32,7 +32,7 @@
 - name: Generate localhost certificate
   shell: |
     openssl req -new -sha256 -nodes -out server.csr -newkey rsa:2048 -keyout server.key -config server.csr.cnf
-    openssl x509 -req -in server.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out server.crt -days 398 -sha256 -extfile v3.ext
+    openssl x509 -req -in server.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out server.crt -days 398 -sha256 -extfile v3.ext -passin 'pass:{{ ssl_passphrase }}'
   args:
     chdir: /etc/ssl/certs
     creates: /etc/ssl/certs/server.crt

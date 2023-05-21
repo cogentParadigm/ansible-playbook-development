@@ -1,10 +1,12 @@
 ---
+ssl_passphrase: ""
 ssl_certificate_dn_country: ""
 ssl_certificate_dn_state: ""
 ssl_certificate_dn_city: ""
 ssl_certificate_dn_organization: ""
 ssl_certificate_dn_organization_unit: ""
 ssl_certificate_dn_email: ""
+ssl_certificate_dn_common_name: "localhost"
 
 ssl_hosts:
   - "localhost"
