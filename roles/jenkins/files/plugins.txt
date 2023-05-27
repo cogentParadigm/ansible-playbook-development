@@ -44,6 +44,7 @@ jakarta-mail-api:2.0.1-3
 javax-activation-api:1.2.0-6
 javax-mail-api:1.6.2-9
 jaxb:2.3.8-1
+job-dsl:1.83
 jsch:0.1.55.61.va_e9ee26616e7
 junit:1196.vb_4cf28b_c7724
 lockable-resources:1141.v7c5f8f31d2ee
