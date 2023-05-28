@@ -13,3 +13,10 @@
   with_items:
     - jenkins
   become: yes
+
+- name: Set systemd environment variables
+  lineinfile:
+    path: /etc/systemd/system/multi-user.target.wants/jenkins.service
+    regexp: '^Environment="JAVA_OPTS='
+    line: Environment="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
+  become: yes
