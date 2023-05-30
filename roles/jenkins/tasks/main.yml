@@ -42,6 +42,7 @@
     name: 'jenkins'
     groups: docker
     append: yes
+  become: true
 
 - name: Start Jenkins
   include_tasks: "{{ item }}"
