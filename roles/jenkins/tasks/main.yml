@@ -37,6 +37,12 @@
   when: jenkins_create_casc | bool
   become: true
 
+- name: adding jenkins user to docker group
+  user:
+    name: 'jenkins'
+    groups: docker
+    append: yes
+
 - name: Start Jenkins
   include_tasks: "{{ item }}"
   with_first_found:
