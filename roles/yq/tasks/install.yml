@@ -3,7 +3,7 @@
   shell: |
     wget https://github.com/mikefarah/yq/releases/download/{{ yq_version }}/{{ yq_binary }}.tar.gz
     tar -xzf {{ yq_binary }}.tar.gz
-    mv {{ yq_binary }} /usr/local/bin/
+    mv {{ yq_binary }} /usr/local/bin/yq
   args:
     creates: /usr/local/bin/yq
   become: true
