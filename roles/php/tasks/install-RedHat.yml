@@ -35,6 +35,7 @@
     - php-pecl-yaml
     - php-pecl-zip
     - php-pgsql
+    - php-posix
     - php-soap
     - php-xml
     - wget
