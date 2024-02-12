@@ -12,3 +12,5 @@ chromedriver_enabled: false
 mailcatcher_enabled: false
 wkhtmltopdf_enabled: false
 docker_enabled: false
+jenkins_enabled: false
+yq_enabled: false
