@@ -1,4 +1,4 @@
-- shell: curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash -s -- --mariadb-server-version="mariadb-10.2"
+- shell: curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash -s -- --mariadb-server-version="mariadb-{{ mariadb_version }}"
   become: true
 
 - package:

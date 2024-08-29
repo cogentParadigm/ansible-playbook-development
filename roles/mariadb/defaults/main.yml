@@ -1,4 +1,5 @@
 ---
+mariadb_version: "10.2"
 mariadb_root_password: ""
 mariadb_conf_path: /etc/my.cnf
 mariadb_conf_template: my.cnf.j2

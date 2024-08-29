@@ -5,6 +5,7 @@
     - php{{ php_version | replace('.', '') }}
     - php{{ php_version | replace('.', '') }}-fpm
     - php{{ php_version | replace('.', '') }}-curl
+    - php{{ php_version | replace('.', '') }}-excimer
     - php{{ php_version | replace('.', '') }}-exif
     - php{{ php_version | replace('.', '') }}-fpm
     - php{{ php_version | replace('.', '') }}-gd

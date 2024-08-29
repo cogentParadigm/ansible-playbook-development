@@ -5,6 +5,7 @@
     - php
     - php-ast
     - php-curl
+    - php-excimer
     - php-exif
     - php-fpm
     - php-gd

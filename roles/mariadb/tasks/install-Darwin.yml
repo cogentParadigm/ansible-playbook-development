@@ -1,4 +1,4 @@
 - macports:
-    name: mariadb-10.2-server
+    name: mariadb-{{ mariadb_version }}-server
     state: present
   become: true
