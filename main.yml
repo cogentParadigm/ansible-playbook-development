@@ -19,7 +19,7 @@
         loop_var: local_vars
 
   tasks:
-    - include: "{{ task_include }}"
+    - include_tasks: "{{ task_include }}"
       with_first_found:
         - "tasks/{{ ansible_os_family }}.yml"
         - "tasks/Unsupported.yml"
