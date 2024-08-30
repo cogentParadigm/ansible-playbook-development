@@ -43,7 +43,7 @@
     host_all: yes
     login_unix_socket: "{{ (mariadb_socket_auth == true) | ternary(mariadb_socket_path, '') }}"
   become: yes
-  when: mariadb_root_password | bool
+  when: mariadb_root_password != ''
 
 - name: Configure ~/.my.cnf
   ini_file:
@@ -57,7 +57,7 @@
       value:  root
     - option: password
       value: "{{ mariadb_root_password }}"
-  when: mariadb_root_password | bool
+  when: mariadb_root_password != ''
 
 - name: Remove anonymous users
   mysql_user:
