@@ -80,3 +80,8 @@
     state: absent
     login_unix_socket: "{{ (mariadb_socket_auth == true) | ternary(mariadb_socket_path, '') }}"
   become: yes
+
+- name: Load time zone tables
+  shell: mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql mysql
+  changed_when: false
+  become: yes
